@@ -1,0 +1,46 @@
+# SharePoint Framework Docker images
+
+Docker images for running [SharePoint Framework](https://github.com/SharePoint/sp-dev-docs).
+
+## Usage
+
+- in the HOSTS file on your host add:
+```
+127.0.0.1    spfx
+```
+- Create a folder for your SharePoint Framework project
+- In the command line (on macOS):
+```
+cd [your project]
+docker run -h spfx -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+```
+- In the command line (on Windows):
+```
+cd [your project]
+docker run -h spfx -it --rm --name your-project -v /c/Users/[your project]:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+```
+
+After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
+
+```
+yo @microsoft/sharepoint
+```
+
+To open the SharePoint workbench navigate in the browser to **https://spfx:5432/workbench**.
+
+All files scaffolded by the generator will be stored in your project directory on your host from where you can commit them to source control.
+
+To close the container in the container command line run:
+```
+exit
+```
+
+## Available tags
+- **latest**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
+- **drop-4**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
+
+## Known issues
+When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
+
+## Limitations
+Windows 10 Anniversary Update and Windows Server 2016 have native support for containers. At this moment Windows supports only containers built on Windows Server Core or Nano Server and you won't be able to run this container natively on Windows. Instead you should use Docker for Windows or Docker Toolbox.
