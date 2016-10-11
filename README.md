@@ -4,6 +4,7 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 
 ## Usage
 
+- in **Docker Settings > Shared Drives** verify that the drive where you create your projects is shared
 - in the HOSTS file on your host add:
 ```
 127.0.0.1    spfx
@@ -14,10 +15,10 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 cd [your project]
 docker run -h spfx -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
-- In the command line (on Windows):
+- In the command line (on Windows, assuming your project is located at `c:\projects\spfx-helloworld`):
 ```
-cd [your project]
-docker run -h spfx -it --rm --name your-project -v /c/Users/[your project]:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+cd c:\projects\spfx-helloworld
+docker run -h spfx -it --rm --name spfx-helloworld -v /c/projects/spfx-helloworld:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
