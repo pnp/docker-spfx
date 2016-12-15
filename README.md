@@ -2,6 +2,10 @@
 
 Docker images for running [SharePoint Framework](https://github.com/SharePoint/sp-dev-docs).
 
+
+[![Pulls from Docker Hub](https://img.shields.io/docker/pulls/waldekm/spfx.svg)](https://hub.docker.com/r/waldekm/spfx)
+[![Stars on Docker Hub](https://img.shields.io/docker/stars/waldekm/spfx.svg)](https://hub.docker.com/r/waldekm/spfx)
+
 ## Usage
 
 - in **Docker Settings > Shared Drives** verify that the drive where you create your projects is shared
