@@ -41,7 +41,8 @@ exit
 ```
 
 ## Available tags
-- **latest**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 6](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-6)
+- **latest**: contains the SharePoint Framework Yeoman generator from the [RC0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-RC0)
+- **rc0**: contains the SharePoint Framework Yeoman generator from the [RC0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-RC0)
 - **drop-6**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 6](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-6)
 - **drop-5**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 5](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-5)
 - **drop-4**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
