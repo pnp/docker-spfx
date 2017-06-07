@@ -1,4 +1,4 @@
-FROM node:6.9.4
+FROM node:6.10.3
 
 EXPOSE 5432 4321 35729
 
