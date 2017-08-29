@@ -48,7 +48,8 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the 1.1.3 release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.2.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-RC-Drop-1.2) release
+- **1.2.0**: contains the SharePoint Framework Yeoman generator from the [1.2.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-RC-Drop-1.2) release
 - **1.1.3**: contains the SharePoint Framework Yeoman generator from the 1.1.3 release
 - **1.1.1**: contains the SharePoint Framework Yeoman generator from the [1.1.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
 - **1.1.0**: contains the SharePoint Framework Yeoman generator from the [1.1.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
