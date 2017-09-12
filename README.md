@@ -53,6 +53,7 @@ exit
 - **1.1.3**: contains the SharePoint Framework Yeoman generator from the 1.1.3 release
 - **1.1.1**: contains the SharePoint Framework Yeoman generator from the [1.1.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
 - **1.1.0**: contains the SharePoint Framework Yeoman generator from the [1.1.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
+- **1.0.2**: contains the SharePoint Framework Yeoman generator from the 1.0.2 release
 - **ga**: contains the SharePoint Framework Yeoman generator from the [GA](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-GA) release
 - **rc0**: contains the SharePoint Framework Yeoman generator from the [RC0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-RC0) release
 - **drop-6**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 6](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-6)
