@@ -9,25 +9,19 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 ## Usage
 
 - in **Docker Settings > Shared Drives** verify that the drive where you create your projects is shared
-- in the HOSTS file on your host add:
-
-```text
-127.0.0.1    spfx
-```
-
 - Create a folder for your SharePoint Framework project
 - In the command line (on macOS):
 
 ```sh
 cd [your project]
-docker run -h spfx -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 - In the command line (on Windows, assuming your project is located at `c:\projects\spfx-helloworld`):
 
 ```sh
 cd c:\projects\spfx-helloworld
-docker run -h spfx -it --rm --name spfx-helloworld -v /c/projects/spfx-helloworld:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name spfx-helloworld -v /c/projects/spfx-helloworld:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
@@ -36,7 +30,7 @@ After the container started you can work with it the same way you would work wit
 yo @microsoft/sharepoint
 ```
 
-To open the SharePoint workbench navigate in the browser to **https://spfx:5432/workbench**.
+To open the SharePoint workbench navigate in the browser to **https://localhost:5432/workbench**.
 
 All files scaffolded by the generator will be stored in your project directory on your host from where you can commit them to source control.
 
@@ -48,9 +42,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the 1.3.2 release
-- **online**: contains the SharePoint Framework Yeoman generator from the 1.3.2 release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the 1.3.2 release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
+- **1.3.4**: contains the SharePoint Framework Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
 - **1.3.2**: contains the SharePoint Framework Yeoman generator from the 1.3.2 release
 - **1.3.1**: contains the SharePoint Framework Yeoman generator from the 1.3.1 release
 - **1.3.0**: contains the SharePoint Framework Yeoman generator from the 1.3.0 release
