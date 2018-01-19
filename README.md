@@ -17,10 +17,17 @@ cd [your project]
 docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
-- In the command line (on Windows, assuming your project is located at `c:\projects\spfx-helloworld`):
+- In PowerShell on Windows:
 
-```sh
-cd c:\projects\spfx-helloworld
+```PowerShell
+cd [your project]
+docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+```
+
+- In other shells on Windows (assumes that your project is at `C:\projects\spfx-helloworld`)
+
+```cmd
+cd \projects\spfx-helloworld
 docker run -it --rm --name spfx-helloworld -v /c/projects/spfx-helloworld:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
