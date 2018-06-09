@@ -52,7 +52,6 @@ exit
 - **latest**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.0) release
 - **online**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.0) release
 - **onprem**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.0) release
-- **1.5.0-plusbeta**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.0) release
 - **1.5.0**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
 - **1.4.1**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
 - **1.4.0**: contains the SharePoint Framework Yeoman generator from the [1.4.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4) release
