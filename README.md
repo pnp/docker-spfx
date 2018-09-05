@@ -49,9 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
+- **1.6.0**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
 - **1.5.1**: contains the SharePoint Framework Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
 - **1.5.0**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SharePoint-Framework-Package-v1.5) release
 - **1.4.1**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
@@ -76,6 +77,24 @@ exit
 ### Unable to write files to disk
 
 When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
+
+### Can't access workbench and bundles in SharePoint Framework 1.6.0
+
+When using the container with SharePoint Framework v1.6.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
+
+```json
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "hostname": "0.0.0.0",
+  "https": true,
+  "initialPage": "https://localhost:5432/workbench",
+  "api": {
+    "port": 5432,
+    "entryPath": "node_modules/@microsoft/sp-webpart-workbench/lib/api/"
+  }
+}
+```
 
 ### Can't access workbench and bundles in SharePoint Framework 1.5.0
 
