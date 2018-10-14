@@ -96,6 +96,36 @@ When using the container with SharePoint Framework v1.6.0, you can't access the 
 }
 ```
 
+### Can't access workbench and bundles in SharePoint Framework 1.6.0 on Windows
+
+When using the container with SharePoint Framework v1.6.0 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
+
+```json
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json",
+  "cdnBasePath": "<!-- PATH TO CDN -->",
+  "debugBasePath": "https://localhost:4321/"
+}
+```
+
+Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 83-85 from:
+
+```js
+spBuildCoreTasks.writeManifests.mergeConfig({
+    debugBasePath: `${serve.taskConfig.https ? 'https' : 'http'}://${serve.taskConfig.hostname}:${serve.taskConfig.port}/`
+});
+```
+
+to (add the `if` statement):
+
+```js
+if (!spBuildCoreTasks.writeManifests.taskConfig.debugBasePath) {
+    spBuildCoreTasks.writeManifests.mergeConfig({
+        debugBasePath: `${serve.taskConfig.https ? 'https' : 'http'}://${serve.taskConfig.hostname}:${serve.taskConfig.port}/`
+    });
+}
+```
+
 ### Can't access workbench and bundles in SharePoint Framework 1.5.0
 
 When using the container with SharePoint Framework v1.5.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by a change to the `gulp-connect` package used by the `gulp serve` task. To fix the issue, after scaffolding the project, in the code editor open the `./node_modules/gulp-connect/index.js` file and change line 106 from:
