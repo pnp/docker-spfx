@@ -1,8 +1,8 @@
-FROM node:6.9.4
+FROM node:8.12.0
 
 EXPOSE 5432 4321 35729
 
-RUN npm i -g gulp yo @microsoft/generator-sharepoint && \
+RUN npm i -g gulp@3 yo @microsoft/generator-sharepoint --unsafe-perm && \
     npm cache clean
 
 VOLUME /usr/app/spfx
