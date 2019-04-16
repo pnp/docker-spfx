@@ -49,9 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
+- **1.8.0**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
 - **1.7.1**: contains the SharePoint Framework Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
 - **1.7.0**: contains the SharePoint Framework Yeoman generator from the [1.7.0](https://github.com/SharePoint/sp-dev-docs/wiki/SharePoint-Framework-v1.7-release-notes) release
 - **1.6.0**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
@@ -80,9 +81,9 @@ exit
 
 When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
 
-### Can't access workbench and bundles in SharePoint Framework 1.6.0/1.7.0/1.7.1
+### Can't access workbench and bundles in SharePoint Framework 1.6.0/1.7.0/1.7.1/1.8.0
 
-When using the container with SharePoint Framework v1.6.0/v1.7.0/v1.7.1, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
+When using the container with SharePoint Framework v1.6.0/v1.7.0/v1.7.1/v1.8.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
 
 ```json
 {
@@ -98,9 +99,9 @@ When using the container with SharePoint Framework v1.6.0/v1.7.0/v1.7.1, you can
 }
 ```
 
-### Can't access workbench and bundles in SharePoint Framework 1.6.0/1.7.0/1.7.1 on Windows
+### Can't access workbench and bundles in SharePoint Framework 1.6.0/1.7.0/1.7.1/1.8.0 on Windows
 
-When using the container with SharePoint Framework v1.6.0/v1.7.0/v1.7.1 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
+When using the container with SharePoint Framework v1.6.0/v1.7.0/v1.7.1/v1.8.0 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
 
 ```json
 {
