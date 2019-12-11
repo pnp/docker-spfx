@@ -49,9 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
+- **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
 - **1.8.2**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
 - **1.8.1**: contains the SharePoint Framework Yeoman generator from the [1.8.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.1-release-notes) release
 - **1.8.0**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
