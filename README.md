@@ -49,9 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
+- **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
 - **1.10.0**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
 - **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
 - **1.8.2**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
@@ -115,7 +116,7 @@ When using the container with SharePoint Framework >=v1.6.0 on Windows, you can'
 }
 ```
 
-Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 83-85 from:
+Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 96-98 from:
 
 ```js
 spBuildCoreTasks.writeManifests.mergeConfig({
