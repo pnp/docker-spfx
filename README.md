@@ -115,7 +115,7 @@ When using the container with SharePoint Framework >=v1.6.0 on Windows, you can'
 }
 ```
 
-Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 83-85 from:
+Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 96-98 from:
 
 ```js
 spBuildCoreTasks.writeManifests.mergeConfig({
