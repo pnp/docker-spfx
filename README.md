@@ -49,10 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
-- **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/release-1.11.0) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
+- **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
 - **1.10.0**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
 - **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
 - **1.8.2**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
@@ -92,7 +92,7 @@ When using the container with SharePoint Framework >=v1.6.0, you can't access th
 
 ```json
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json?WT.mc_id=m365-0000-wmastyka",
   "port": 4321,
   "hostname": "0.0.0.0",
   "https": true,
@@ -110,7 +110,7 @@ When using the container with SharePoint Framework >=v1.6.0 on Windows, you can'
 
 ```json
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json?WT.mc_id=m365-0000-wmastyka",
   "cdnBasePath": "<!-- PATH TO CDN -->",
   "debugBasePath": "https://localhost:4321/"
 }
