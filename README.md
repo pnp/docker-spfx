@@ -92,7 +92,7 @@ When using the container with SharePoint Framework >=v1.6.0, you can't access th
 
 ```json
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json?WT.mc_id=m365-0000-wmastyka",
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
   "port": 4321,
   "hostname": "0.0.0.0",
   "https": true,
@@ -110,7 +110,7 @@ When using the container with SharePoint Framework >=v1.6.0 on Windows, you can'
 
 ```json
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json?WT.mc_id=m365-0000-wmastyka",
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json",
   "cdnBasePath": "<!-- PATH TO CDN -->",
   "debugBasePath": "https://localhost:4321/"
 }
