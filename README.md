@@ -49,9 +49,10 @@ exit
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.12.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.0?WT.mc_id=m365-0000-wmastyka) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.12.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.0?WT.mc_id=m365-0000-wmastyka) release
+- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.12.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.0?WT.mc_id=m365-0000-wmastyka) release
+- **1.12.0**: contains the SharePoint Framework Yeoman generator from the [1.12.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.0?WT.mc_id=m365-0000-wmastyka) release
 - **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
 - **1.10.0**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
 - **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
