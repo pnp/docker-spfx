@@ -99,15 +99,25 @@ When using the container with SharePoint Framework >=v1.6.0, you can't access th
   "port": 4321,
   "hostname": "0.0.0.0",
   "https": true,
-  "initialPage": "https://localhost:5432/workbench",
-  "api": {
-    "port": 5432,
-    "entryPath": "node_modules/@microsoft/sp-webpart-workbench/lib/api/"
-  }
+  "initialPage": "https://enter-your-SharePoint-site/_layouts/workbench.aspx"
 }
 ```
 
-### Can't access workbench and bundles in SharePoint Framework >=1.6.0 on Windows
+### Can't access bundles in SharePoint Framework >=1.12.1
+
+Modify `node_modules\@microsoft\spfx-heft-plugins\lib\plugins\webpackConfigurationPlugin\WebpackConfigurationGenerator.js:393`
+
+```javascript
+const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://${serveConfig.hostname || 'localhost'}:${serveConfig.port || 4321}/dist/`;
+```
+
+to:
+
+```javascript
+const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://localhost:${serveConfig.port || 4321}/dist/`;
+```
+
+### Can't access workbench and bundles in SharePoint Framework >=1.6.0 <=1.11.0 on Windows
 
 When using the container with SharePoint Framework >=v1.6.0 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
 
