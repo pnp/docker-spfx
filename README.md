@@ -37,8 +37,6 @@ After the container started you can work with it the same way you would work wit
 yo @microsoft/sharepoint
 ```
 
-To open the SharePoint workbench navigate in the browser to **https://localhost:5432/workbench**.
-
 All files scaffolded by the generator will be stored in your project directory on your host from where you can commit them to source control.
 
 To close the container in the container command line run:
