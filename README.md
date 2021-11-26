@@ -14,21 +14,21 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 
 ```sh
 cd [your project]
-docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 - In PowerShell on Windows:
 
 ```PowerShell
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 - In other shells on Windows
 
 ```cmd
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 5432:5432 -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
 ```
 
 After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
@@ -36,8 +36,6 @@ After the container started you can work with it the same way you would work wit
 ```sh
 yo @microsoft/sharepoint
 ```
-
-To open the SharePoint workbench navigate in the browser to **https://localhost:5432/workbench**.
 
 All files scaffolded by the generator will be stored in your project directory on your host from where you can commit them to source control.
 
