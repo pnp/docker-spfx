@@ -128,7 +128,7 @@ When using the container with SharePoint Framework >=v1.6.0 on Windows, you can'
 }
 ```
 
-Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines 96-98 from:
+Then, open `node_modules\@microsoft\sp-build-web\lib\SPWebBuildRig.js` and change lines from:
 
 ```js
 spBuildCoreTasks.writeManifests.mergeConfig({
@@ -145,6 +145,15 @@ if (!spBuildCoreTasks.writeManifests.taskConfig.debugBasePath) {
     });
 }
 ```
+
+Depending on the SPFx version the lines to replace are different:
+
+| SPFx version | SPWebBuildRig.js lines to replace |
+| ------------- | ------------- |
+| 1.6.0, 1.7.0 or 1.7.1 | 83-85 |
+| 1.8.0, 1.8.1 or 1.8.2 | 88-90 |
+| 1.9.1 | 92-94 |
+| 1.10.0 or 1.11.0 | 96-98 |
 
 ### Can't access workbench and bundles in SharePoint Framework 1.5.0
 
