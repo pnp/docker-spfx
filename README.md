@@ -102,9 +102,23 @@ When using the container with SharePoint Framework >=v1.6.0, you can't access th
 }
 ```
 
-### Can't access bundles in SharePoint Framework >=1.12.1
+### Can't access bundles in SharePoint Framework 1.13.1
 
 Modify `node_modules\@microsoft\spfx-heft-plugins\lib\plugins\webpackConfigurationPlugin\WebpackConfigurationGenerator.js:393`
+
+```javascript
+const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://${serveConfig.hostname || 'localhost'}:${serveConfig.port || 4321}/${distFolderName}/`;
+```
+
+to:
+
+```javascript
+const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://localhost:${serveConfig.port || 4321}/${distFolderName}/`;
+```
+
+### Can't access bundles in SharePoint Framework 1.12.1
+
+Modify `node_modules\@microsoft\spfx-heft-plugins\lib\plugins\webpackConfigurationPlugin\WebpackConfigurationGenerator.js:376`
 
 ```javascript
 const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://${serveConfig.hostname || 'localhost'}:${serveConfig.port || 4321}/dist/`;
