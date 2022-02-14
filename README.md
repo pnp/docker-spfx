@@ -3,8 +3,8 @@
 Docker images for running [SharePoint Framework](https://github.com/SharePoint/sp-dev-docs).
 
 
-[![Pulls from Docker Hub](https://img.shields.io/docker/pulls/waldekm/spfx.svg)](https://hub.docker.com/r/waldekm/spfx)
-[![Stars on Docker Hub](https://img.shields.io/docker/stars/waldekm/spfx.svg)](https://hub.docker.com/r/waldekm/spfx)
+[![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
+[![Stars on Docker Hub](https://img.shields.io/docker/stars/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
 
 ## Usage
 
@@ -14,21 +14,21 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 
 ```sh
 cd [your project]
-docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
 ```
 
 - In PowerShell on Windows:
 
 ```PowerShell
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
 ```
 
 - In other shells on Windows
 
 ```cmd
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 4321:4321 -p 35729:35729 waldekm/spfx
+docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
 ```
 
 After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
