@@ -1,6 +1,6 @@
 FROM node:14.18.0
 
-EXPOSE 5432 4321 35729
+EXPOSE 4321 35729
 
 ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
   PATH=$PATH:/usr/app/.npm-global/bin
