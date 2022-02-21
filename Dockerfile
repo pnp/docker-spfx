@@ -1,6 +1,6 @@
-FROM node:14.18.0
+FROM node:14.19.0
 
-EXPOSE 5432 4321 35729
+EXPOSE 4321 35729
 
 ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
   PATH=$PATH:/usr/app/.npm-global/bin
@@ -13,6 +13,6 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 
 USER spfx
 
-RUN npm i -g gulp@4 yo @microsoft/generator-sharepoint@1.13.1
+RUN npm i -g gulp@4 yo @microsoft/generator-sharepoint@1.14.0
 
 CMD /bin/bash
