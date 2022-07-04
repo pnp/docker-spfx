@@ -47,3 +47,38 @@ Before contributing:
 - **DO NOT** surprise us with PR's. Instead file an issue & start a discussion so we can agree on a direction before you invest a large amount of time.
 - **DO NOT** commit code you didn't write.
 - **DO NOT** submit PR's that refactor existing code without a discussion first.
+
+## Debugging locally
+
+### Building from Dockerfile
+
+```sh
+docker build -t docker-spfx-00 .
+```
+
+### Testing a new project
+
+```sh
+docker run --rm -it -p 4321:4321 -p 35729:35729 docker-spfx-00
+```
+
+Run in the new container:
+
+```sh
+cd /home/spfx
+yo @microsoft/sharepoint --solution-name helloworld --component-type webpart --component-name hello-world-webpart --component-description "HelloWorld web part" --is-domain-isolated false --framework none --environment spo --skip-feature-deployment false --no-insight
+cd helloworld/
+cat <<EOF | tee config/serve.json
+{
+  "\$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "ipAddress": "0.0.0.0",
+  "https": true,
+  "initialPage": "https://enter-your-SharePoint-site/_layouts/workbench.aspx"
+}
+EOF
+gulp trust-dev-cert
+gulp serve --nobrowser
+```
+
+Add the certificate to trusted certificates on your machine, open the workbench and add the web part.
