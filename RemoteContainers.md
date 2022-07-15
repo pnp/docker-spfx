@@ -9,6 +9,16 @@ There might be two options of using Visual Studio Code remote containers with m3
 - Using locally installed Docker, on your desktop/laptop
 - Running containers in cloud using GitHub Codespaces (requires a paid GitHub plan)
 
+When you run in a remote container in GitHub Codespaces, you do NOT need to install any of the following on your laptop/desktop:
+
+- Node.js
+- yeoman
+- gulp
+- Docker
+- git
+
+What you will need locally is only Visual Studio!
+
 ### Locally Installed Docker
 
 For using that option you need to have locally installed the following software:
@@ -97,7 +107,7 @@ This is the structure that you should have:
 
 ![](./docu-pictures/vs-log.png)
 
-5. Type `gulp serve --nobrowser` in browser
+5. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
 
 6. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
 
@@ -139,6 +149,30 @@ $store.close();
 5. Confirm opening Visual Studio Code:
 
 ![GitHub Code Button](./docu-pictures/github-open-vs-confirm.png)
+
+6. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
+
+7. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
+
+```powershell
+$tcpClient = New-Object -TypeName System.Net.Sockets.TcpClient;
+$tcpClient.Connect("localhost", 4321);
+$tcpStream = $tcpClient.GetStream();
+$callback = { param($sender, $cert, $chain, $errors) return $true };
+$sslStream = New-Object -TypeName System.Net.Security.SslStream -ArgumentList @($tcpStream, $true, $callback);
+$sslStream.AuthenticateAsClient('');
+$certificate = $SslStream.RemoteCertificate;
+$x509Certificate = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certificate
+$store = new-object System.Security.Cryptography.X509Certificates.X509Store(
+    [System.Security.Cryptography.X509Certificates.StoreName]::Root,
+    "localmachine"
+)
+$store.open("MaxAllowed");
+$store.add($x509Certificate);
+$store.close();
+```
+
+8. Now you should be able to access the workbench
 
 ## Possible Issues
 
