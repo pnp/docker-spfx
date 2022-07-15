@@ -45,6 +45,8 @@ To close the container in the container command line run:
 exit
 ```
 
+You can also use this image for [Visual Studio development containers](./DevelopmentContainers.md)
+
 ## Available tags
 
 - **latest**: contains the SharePoint Framework Yeoman generator from the [1.16.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.16.1?WT.mc_id=m365-0000-wmastyka) release
