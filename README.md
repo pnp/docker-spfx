@@ -45,6 +45,8 @@ To close the container in the container command line run:
 exit
 ```
 
+You can also use this image for [Visual Studio remote containers](./RemoteContainers.md)
+
 ## Available tags
 
 - **latest**: contains the SharePoint Framework Yeoman generator from the [1.15.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.15?WT.mc_id=m365-0000-wmastyka) release
