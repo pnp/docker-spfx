@@ -1,15 +1,15 @@
-# Using m365pnp/spfx Image in Visual Studio Remote Containers
+# Using m365pnp/spfx Image in Visual Studio Development Containers
 
-Visual Studio Code Remote Containers allows you to work with SPFx solutions in containers that Visual Studio will run automatically for you so you don't need to care running `docker run`. In this it is also easier to make sure that all members of the project are using the same development environment.
+Visual Studio Code development containers allows you to work with SPFx solutions in containers that Visual Studio will run automatically for you so you don't need to care running `docker run`. In this it is also easier to make sure that all members of the project are using the same development environment.
 
 ## Prerequisites
 
-There might be two options of using Visual Studio Code remote containers with m365pnp/spfx image:
+There might be two options of using Visual Studio Code development containers with m365pnp/spfx image:
 
 - Using locally installed Docker, on your desktop/laptop
 - Running containers in cloud using GitHub Codespaces (requires a paid GitHub plan)
 
-When you run in a remote container in GitHub Codespaces, you do NOT need to install any of the following on your laptop/desktop:
+When you run in a development container in GitHub Codespaces, you do NOT need to install any of the following on your laptop/desktop:
 
 - Node.js
 - yeoman
@@ -37,7 +37,7 @@ This option requires the following:
 - Git repository in a GitHub organization with enabled Codespaces, https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/enabling-github-codespaces-for-your-organization
 - SPFx solution code, scaffolded in the root directory
 
-## Defining Remote Containers for the Project
+## Defining Development Containers for the Project
 
 1. In the root folder of the source code, create the folder called `.devcontainer`.
 
@@ -182,4 +182,4 @@ Make sure that in Visual Studio Code local ports are allocated correspondingly:
 
 ![GitHub Code Button](./docu-pictures/vs-ports.png)
 
-If the local ports are busy with something else before you open the project in the remote container, Visual Studio will allocate random ports instead
+If the local ports are busy with something else before you open the project in the development container, Visual Studio will allocate random ports instead.

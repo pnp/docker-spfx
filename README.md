@@ -45,7 +45,7 @@ To close the container in the container command line run:
 exit
 ```
 
-You can also use this image for [Visual Studio remote containers](./RemoteContainers.md)
+You can also use this image for [Visual Studio development containers](./DevelopmentContainers.md)
 
 ## Available tags
 
