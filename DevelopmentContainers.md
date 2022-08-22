@@ -24,7 +24,7 @@ What you will need locally is only Visual Studio!
 For using that option you need to have locally installed the following software:
 
 - Visual Studio Code
-- Visual Studio Code extension, Remote - Containers https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+- [Visual Studio Code extension, Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - Docker Engine
 - SPFx solution code, scaffolded in the root directory
 
@@ -33,8 +33,8 @@ For using that option you need to have locally installed the following software:
 This option requires the following:
 
 - Visual Studio Code
-- Visual Studio Code extension, Remote - Containers, https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-- Git repository in a GitHub organization with enabled Codespaces, https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/enabling-github-codespaces-for-your-organization
+- [Visual Studio Code extension, Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- Git repository in a [GitHub organization with enabled Codespaces](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/enabling-github-codespaces-for-your-organization)
 - SPFx solution code, scaffolded in the root directory
 
 ## Defining Development Containers for the Project
