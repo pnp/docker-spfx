@@ -90,22 +90,22 @@ gulp trust-dev-cert
 
 This is the structure that you should have:
 
-![Typical SPFx solution structure](./docu-pictures/vs-files.png)
+![Typical SPFx solution structure](./assets/vs-files.png)
 
 ## Starting working with SPFx when you run Docker locally
 
 1. Open the folder in Visual Studio Code
 2. Click in the bottom left corner:
 
-![VS bottom left corner](./docu-pictures/VScorner.png)
+![VS bottom left corner](./assets/VScorner.png)
 
 3. Select `Reopen in Container`:
 
-![Reopen in Container menu](./docu-pictures/vs-containers-selector.png)
+![Reopen in Container menu](./assets/vs-containers-selector.png)
 
 4. Wait until the Node.js modules are installed:
 
-![Container Preparation Log](./docu-pictures/vs-log.png)
+![Container Preparation Log](./assets/vs-log.png)
 
 5. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
 
@@ -136,19 +136,19 @@ $store.close();
 1. Open the project in GitHub site.
 2. Click `Code` button:
 
-![GitHub Code Button](./docu-pictures/github-code.png)
+![GitHub Code Button](./assets/github-code.png)
 
 3. Click `Create codespace on ...` button:
 
-![GitHub Create codespace Button](./docu-pictures/github-create-space.png)
+![GitHub Create codespace Button](./assets/github-create-space.png)
 
 4. Click `Open this codespace in VS Code Desktop`:
 
-![GitHub Open codespace Button](./docu-pictures/github-open-vs.png)
+![GitHub Open codespace Button](./assets/github-open-vs.png)
 
 5. Confirm opening Visual Studio Code:
 
-![GitHub Open VS Code Warning](./docu-pictures/github-open-vs-confirm.png)
+![GitHub Open VS Code Warning](./assets/github-open-vs-confirm.png)
 
 6. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
 
@@ -180,6 +180,6 @@ $store.close();
 
 Make sure that in Visual Studio Code local ports are allocated correspondingly:
 
-![VS local ports](./docu-pictures/vs-ports.png)
+![VS local ports](./assets/vs-ports.png)
 
 If the local ports are busy with something else before you open the project in the development container, Visual Studio will allocate random ports instead.
