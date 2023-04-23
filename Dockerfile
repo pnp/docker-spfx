@@ -13,6 +13,6 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 
 USER spfx
 
-RUN npm i --location=global gulp-cli@2 yo @microsoft/generator-sharepoint@1.16.1
+RUN npm i --location=global gulp-cli@2 yo @microsoft/generator-sharepoint@1.17.0
 
 CMD /bin/bash
