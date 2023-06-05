@@ -70,7 +70,7 @@ yo @microsoft/sharepoint --solution-name helloworld --component-type webpart --c
 cd helloworld/
 cat <<EOF | tee config/serve.json
 {
-  "\$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "\$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
   "port": 4321,
   "ipAddress": "0.0.0.0",
   "https": true,
@@ -81,4 +81,26 @@ gulp trust-dev-cert
 gulp serve --nobrowser
 ```
 
-Add the certificate to trusted certificates on your machine, open the workbench and add the web part.
+Add the certificate to trusted certificates on your user profile (not wihin the container)
+
+For adding a certificate in Windows via code, you can use the following PS script:
+
+```powershell
+$tcpClient = New-Object -TypeName System.Net.Sockets.TcpClient;
+$tcpClient.Connect("localhost", 4321);
+$tcpStream = $tcpClient.GetStream();
+$callback = { param($sender, $cert, $chain, $errors) return $true };
+$sslStream = New-Object -TypeName System.Net.Security.SslStream -ArgumentList @($tcpStream, $true, $callback);
+$sslStream.AuthenticateAsClient('');
+$certificate = $SslStream.RemoteCertificate;
+$x509Certificate = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certificate
+$store = new-object System.Security.Cryptography.X509Certificates.X509Store(
+  [System.Security.Cryptography.X509Certificates.StoreName]::Root,
+  "CurrentUser"
+)
+$store.open("MaxAllowed");
+$store.add($x509Certificate);
+$store.close();
+```
+
+Open the workbench (like https://enter-your-SharePoint-site/_layouts/workbench.aspx) and add the web part.
