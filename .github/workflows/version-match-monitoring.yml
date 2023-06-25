@@ -1,0 +1,24 @@
+name: New SPFx Task
+
+on: 
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5,17 * * *'
+
+jobs:
+  version-compare:
+    runs-on: ubuntu-20.04
+    container: node:16.20.1
+    steps:
+    - name: Comparing Current Version
+      run: |
+        apt-get update
+        apt-get install jq -y
+        package_info="$(npm view @microsoft/generator-sharepoint --json)"
+        latest_version="$(echo "$package_info" | jq '.version' --raw-output)"
+        docker_hub_latest_version_string="$(curl https://registry.hub.docker.com/v2/repositories/m365pnp/spfx/tags/$latest_version)"
+        latest_docker_hub_version="$(echo "$docker_hub_latest_version_string" | jq '.name' --raw-output)"
+        if [ "$latest_version" != "$latest_docker_hub_version" ]; then
+          echo "@microsoft/generator-sharepoint latest version is $latest_version";
+          exit 1;
+        fi;
