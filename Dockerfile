@@ -1,4 +1,4 @@
-FROM node:16.20.0
+FROM node:16.20.1
 
 EXPOSE 4321 35729
 
