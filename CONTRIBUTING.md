@@ -53,7 +53,7 @@ Before contributing:
 ### Building from Dockerfile
 
 ```sh
-docker build -t docker-spfx-00 .
+docker build --platform linux/amd64,linux/arm64 -t docker-spfx-00 .
 ```
 
 ### Testing a new project
