@@ -49,14 +49,15 @@ You can also use this image for [Visual Studio development containers](./Develop
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20.0?WT.mc_id=m365-0000-wmastyka) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20.0?WT.mc_id=m365-0000-wmastyka) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.21.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21?WT.mc_id=m365-0000-wmastyka) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.21.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21?WT.mc_id=m365-0000-wmastyka) release
 - **onprem**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
-- **1.20.0**: contains the SharePoint Framework Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20.0?WT.mc_id=m365-0000-wmastyka) release
-- **1.19.0**: contains the SharePoint Framework Yeoman generator from the [1.19.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.19.0?WT.mc_id=m365-0000-wmastyka) release
+- **1.21.0**: contains the SharePoint Framework Yeoman generator from the [1.21.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21?WT.mc_id=m365-0000-wmastyka) release
+- **1.20.0**: contains the SharePoint Framework Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20?WT.mc_id=m365-0000-wmastyka) release
+- **1.19.0**: contains the SharePoint Framework Yeoman generator from the [1.19.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.19?WT.mc_id=m365-0000-wmastyka) release
 - **1.18.2**: contains the SharePoint Framework Yeoman generator from the [1.18.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.2?WT.mc_id=m365-0000-wmastyka) release
 - **1.18.1**: contains the SharePoint Framework Yeoman generator from the [1.18.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.1?WT.mc_id=m365-0000-wmastyka) release
-- **1.18.0**: contains the SharePoint Framework Yeoman generator from the [1.18.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.0?WT.mc_id=m365-0000-wmastyka) release
+- **1.18.0**: contains the SharePoint Framework Yeoman generator from the [1.18.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18?WT.mc_id=m365-0000-wmastyka) release
 - **1.17.4**: contains the SharePoint Framework Yeoman generator from the [1.17.4](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.4?WT.mc_id=m365-0000-wmastyka) release
 - **1.17.3**: contains the SharePoint Framework Yeoman generator from the [1.17.3](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.3?WT.mc_id=m365-0000-wmastyka) release
 - **1.17.2**: contains the SharePoint Framework Yeoman generator from the [1.17.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.2?WT.mc_id=m365-0000-wmastyka) release
@@ -70,7 +71,7 @@ You can also use this image for [Visual Studio development containers](./Develop
 - **1.13.1**: contains the SharePoint Framework Yeoman generator from the [1.13.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13.1?WT.mc_id=m365-0000-wmastyka) release
 - **1.13.0**: contains the SharePoint Framework Yeoman generator from the [1.13.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13?WT.mc_id=m365-0000-wmastyka) release
 - **1.12.1**: contains the SharePoint Framework Yeoman generator from the [1.12.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.1?WT.mc_id=m365-0000-wmastyka) release
-- **1.12.0**: contains the SharePoint Framework Yeoman generator from the [1.12.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.0?WT.mc_id=m365-0000-wmastyka) release
+- **1.12.0**: contains the SharePoint Framework Yeoman generator from the 1.12.0 release
 - **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0?WT.mc_id=m365-0000-wmastyka) release
 - **1.10.0**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
 - **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
