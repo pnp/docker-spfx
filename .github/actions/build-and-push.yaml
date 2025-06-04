@@ -1,0 +1,34 @@
+name: Image Build and Push
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for the Docker image'
+        required: true
+        default: 'latest'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        run: |
+          echo "Setting up Docker Buildx..."
+          docker buildx create --name multiplatform-builder --use --bootstrap
+          docker buildx inspect
+          echo "Docker Buildx setup complete"
+
+      - name: Build multiplatform Docker image
+        run: |
+          echo "Building Docker image for multiple platforms..."
+          docker buildx build \
+            --platform linux/amd64,linux/arm64/v8 \
+            --tag m365pnp/spfx:${{ github.event.inputs.tag }} \
+            --tag m365pnp/spfx:latest \
+            --load \
+            .
+          echo "Docker image built successfully"
