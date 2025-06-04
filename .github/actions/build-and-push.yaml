@@ -29,6 +29,5 @@ jobs:
             --platform linux/amd64,linux/arm64/v8 \
             --tag m365pnp/spfx:${{ github.event.inputs.tag }} \
             --tag m365pnp/spfx:latest \
-            --load \
             .
           echo "Docker image built successfully"
