@@ -38,3 +38,14 @@ jobs:
           echo "Logging in to Docker Hub..."
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
           echo "Docker Hub login successful"
+
+      - name: Push Docker image from cache
+        run: |
+          echo "Pushing Docker image from build cache..."
+          docker buildx build \
+            --platform linux/amd64,linux/arm64/v8 \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
+            --push \
+            .
+          echo "Docker image pushed successfully"
