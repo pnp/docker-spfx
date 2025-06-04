@@ -25,11 +25,11 @@ jobs:
 
       - name: Build multiplatform Docker image
         run: |
-          echo "Building Docker image {{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }}..."
+          echo "Building Docker image ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }}..."
           docker buildx build \
             --platform linux/amd64,linux/arm64/v8 \
-            --tag {{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
-            --tag {{ vars.DOCKER_ORG }}/spfx:latest \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
             .
           echo "Docker image built successfully"
 
