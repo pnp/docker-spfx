@@ -11,6 +11,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: shurick81DockerHub
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,7 +28,13 @@ jobs:
           echo "Building Docker image for multiple platforms..."
           docker buildx build \
             --platform linux/amd64,linux/arm64/v8 \
-            --tag m365pnp/spfx:${{ github.event.inputs.tag }} \
-            --tag m365pnp/spfx:latest \
+            --tag {{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
+            --tag {{ vars.DOCKER_ORG }}/spfx:latest \
             .
           echo "Docker image built successfully"
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "Logging in to Docker Hub..."
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
+          echo "Docker Hub login successful"
