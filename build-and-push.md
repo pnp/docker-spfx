@@ -1,5 +1,7 @@
 # Continuously build and push images to Docker Hub
 
+## Preparing the repo
+
 1. Open `Personal access tokens` in Docker Account Center: https://app.docker.com/settings/personal-access-tokens
 2. Click `Generate new token`
 3. Enter some description
@@ -17,3 +19,7 @@
 Here is how an example of how the result may look:
 
 ![Github Environment Result](assets/github-environment.png)
+
+## Triggering the build
+
+Create and push a git tag. Image will be pushed to Docker Hub with the same tag, and also with `latest` and `online` tags.
