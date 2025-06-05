@@ -11,11 +11,13 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    environment: shurick81DockerHub
+    environment: DockerHubProd
     steps:
+      # For building the image we need to checkout the source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # For installing Docker Buildx we could use the official action, but here we do it manually for better tranansparency, debugging and portability
       - name: Set up Docker Buildx
         run: |
           echo "Setting up Docker Buildx..."
@@ -23,6 +25,15 @@ jobs:
           docker buildx inspect
           echo "Docker Buildx setup complete"
 
+      # For logging in to Docker Hub we could use the official action, but here we do it manually for better tranansparency, debugging and portability
+      - name: Log in to Docker Hub
+        run: |
+          echo "Logging in to Docker Hub..."
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
+          echo "Docker Hub login successful"
+
+      # For building and pushing the image we could use the official action, but here we do it manually for better tranansparency, debugging and portability
+      # We also separate the build and push steps for isolating most common issues
       - name: Build multiplatform Docker image
         run: |
           echo "Building Docker image ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }}..."
@@ -32,12 +43,6 @@ jobs:
             --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
             .
           echo "Docker image built successfully"
-
-      - name: Log in to Docker Hub
-        run: |
-          echo "Logging in to Docker Hub..."
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
-          echo "Docker Hub login successful"
 
       - name: Push Docker image from cache
         run: |
