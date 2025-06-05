@@ -41,6 +41,7 @@ jobs:
             --platform linux/amd64,linux/arm64/v8 \
             --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
             --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:online \
             .
           echo "Docker image built successfully"
 
@@ -51,6 +52,7 @@ jobs:
             --platform linux/amd64,linux/arm64/v8 \
             --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
             --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:online \
             --push \
             .
           echo "Docker image pushed successfully"
