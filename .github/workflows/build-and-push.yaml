@@ -1,12 +1,9 @@
 name: Image Build and Push
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Tag for the Docker image'
-        required: true
-        default: 'latest'
+  push:
+    tags:
+      - '*'
 
 jobs:
   build-and-push:
@@ -36,10 +33,10 @@ jobs:
       # We also separate the build and push steps for isolating most common issues
       - name: Build multiplatform Docker image
         run: |
-          echo "Building Docker image ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }}..."
+          echo "Building Docker image ${{ vars.DOCKER_ORG }}/spfx:${{ github.ref_name }}..."
           docker buildx build \
             --platform linux/amd64,linux/arm64/v8 \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.ref_name }} \
             --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
             --tag ${{ vars.DOCKER_ORG }}/spfx:online \
             .
@@ -50,7 +47,7 @@ jobs:
           echo "Pushing Docker image from build cache..."
           docker buildx build \
             --platform linux/amd64,linux/arm64/v8 \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.event.inputs.tag }} \
+            --tag ${{ vars.DOCKER_ORG }}/spfx:${{ github.ref_name }} \
             --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
             --tag ${{ vars.DOCKER_ORG }}/spfx:online \
             --push \
