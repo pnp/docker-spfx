@@ -41,7 +41,7 @@ jobs:
           fi;
           echo Cleaning the tag name from the first `v` character...
           docker_image_tag_name=${git_tag_name:1};
-          echo "Tag name prepared: $git_tag_name";
+          echo "docker_image_tag_name: $docker_image_tag_name";
           echo "docker_image_tag_name=$docker_image_tag_name" >> $GITHUB_ENV;
 
       # For building and pushing the image we could use the official action, but here we do it manually for better tranansparency, debugging and portability
