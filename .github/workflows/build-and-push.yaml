@@ -14,20 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # For installing Docker Buildx we could use the official action, but here we do it manually for better tranansparency, debugging and portability
+      # Set up Docker Buildx for multiplatform builds
       - name: Set up Docker Buildx
-        run: |
-          echo "Setting up Docker Buildx..."
-          docker buildx create --name multiplatform-builder --use --bootstrap
-          docker buildx inspect
-          echo "Docker Buildx setup complete"
+        uses: docker/setup-buildx-action@v3
 
-      # For logging in to Docker Hub we could use the official action, but here we do it manually for better tranansparency, debugging and portability
+      # Log in to Docker Hub
       - name: Log in to Docker Hub
-        run: |
-          echo "Logging in to Docker Hub..."
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ vars.DOCKER_USERNAME }}" --password-stdin
-          echo "Docker Hub login successful"
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Preparing tag name
       - name: Prepare tag name
@@ -46,27 +42,23 @@ jobs:
           echo "docker_image_tag_name: $docker_image_tag_name";
           echo "docker_image_tag_name=$docker_image_tag_name" >> $GITHUB_ENV;
 
-      # For building and pushing the image we could use the official action, but here we do it manually for better tranansparency, debugging and portability
-      # We also separate the build and push steps for isolating most common issues
+      # Build multiplatform Docker image (without pushing)
       - name: Build multiplatform Docker image
-        run: |
-          echo "Building Docker image ${{ vars.DOCKER_ORG }}/spfx:$docker_image_tag_name..."
-          docker buildx build \
-            --platform linux/amd64,linux/arm64/v8 \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:$docker_image_tag_name \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:online \
-            .
-          echo "Docker image built successfully"
+        uses: docker/build-push-action@v5
+        with:
+          platforms: linux/amd64,linux/arm64/v8
+          tags: |
+            ${{ vars.DOCKER_ORG }}/spfx:${{ env.docker_image_tag_name }}
+            ${{ vars.DOCKER_ORG }}/spfx:latest
+            ${{ vars.DOCKER_ORG }}/spfx:online
 
+      # Push Docker image from cache
       - name: Push Docker image from cache
-        run: |
-          echo "Pushing Docker image from build cache..."
-          docker buildx build \
-            --platform linux/amd64,linux/arm64/v8 \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:$docker_image_tag_name \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:latest \
-            --tag ${{ vars.DOCKER_ORG }}/spfx:online \
-            --push \
-            .
-          echo "Docker image pushed successfully"
+        uses: docker/build-push-action@v5
+        with:
+          platforms: linux/amd64,linux/arm64/v8
+          push: true
+          tags: |
+            ${{ vars.DOCKER_ORG }}/spfx:${{ env.docker_image_tag_name }}
+            ${{ vars.DOCKER_ORG }}/spfx:latest
+            ${{ vars.DOCKER_ORG }}/spfx:online
