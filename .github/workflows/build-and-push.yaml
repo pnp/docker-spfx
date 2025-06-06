@@ -47,10 +47,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64/v8
-          tags: |
-            ${{ vars.DOCKER_ORG }}/spfx:${{ env.docker_image_tag_name }}
-            ${{ vars.DOCKER_ORG }}/spfx:latest
-            ${{ vars.DOCKER_ORG }}/spfx:online
 
       # Push Docker image from cache
       - name: Push Docker image from cache
