@@ -42,14 +42,8 @@ jobs:
           echo "docker_image_tag_name: $docker_image_tag_name";
           echo "docker_image_tag_name=$docker_image_tag_name" >> $GITHUB_ENV;
 
-      # Build multiplatform Docker image (without pushing)
+      # Build and push multiplatform Docker image
       - name: Build multiplatform Docker image
-        uses: docker/build-push-action@v5
-        with:
-          platforms: linux/amd64,linux/arm64/v8
-
-      # Push Docker image from cache
-      - name: Push Docker image from cache
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64/v8
