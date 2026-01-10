@@ -1,4 +1,4 @@
-FROM node:22.16.0
+FROM node:22
 
 EXPOSE 4321 35729
 
@@ -13,7 +13,7 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 
 USER spfx
 
-RUN npm i --location=global gulp-cli@3 yo pnpm
-RUN npm i --location=global @microsoft/generator-sharepoint@1.21.1
+RUN npm i --location=global @rushstack/heft yo pnpm
+RUN npm i --location=global @microsoft/generator-sharepoint@1.22
 
 CMD /bin/bash
