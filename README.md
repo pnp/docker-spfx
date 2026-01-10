@@ -101,6 +101,17 @@ You can also use this image for [Visual Studio development containers](./Develop
 - **drop-5**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 5](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-5)
 - **drop-4**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
 
+### Build
+
+```sh
+docker buildx build . --target default --tag my-spfx
+```
+
+```sh
+cd [your project]
+docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 my-spfx
+```
+
 ## Known issues
 
 ### Unable to write files to disk
