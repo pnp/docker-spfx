@@ -46,8 +46,8 @@ This option requires the following:
 ```json
 // For more information on how to run this SPFx project in a VS Code Remote Container, please visit https://aka.ms/spfx-devcontainer
 {
-	"name": "SPFx 1.15.0",
-	"image": "m365pnp/spfx:1.15.0",
+	"name": "SPFx 1.22.0",
+	"image": "m365pnp/spfx:1.22.0",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 	// Add the IDs of extensions you want installed when the container is created.
@@ -82,10 +82,10 @@ echo
 echo -e "\e[1;94mInstalling Node dependencies\e[0m"
 npm install
 
-## commands to create dev certificate and copy it to the root folder of the project
+## commands to create dev certificate 
 echo
 echo -e "\e[1;94mGenerating dev certificate\e[0m"
-gulp trust-dev-cert
+heft trust-dev-cert
 ```
 
 This is the structure that you should have:
@@ -107,7 +107,7 @@ This is the structure that you should have:
 
 ![Container Preparation Log](./assets/vs-log.png)
 
-5. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
+5. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
 6. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
 
@@ -150,7 +150,7 @@ $store.close();
 
 ![GitHub Open VS Code Warning](./assets/github-open-vs-confirm.png)
 
-6. Type `gulp serve --nobrowser` in the Visual Studio Code terminal
+6. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
 7. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
 

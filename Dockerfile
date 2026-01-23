@@ -13,7 +13,7 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 
 USER spfx
 
-RUN npm i --location=global gulp-cli@3 yo pnpm
-RUN npm i --location=global @microsoft/generator-sharepoint@1.21.1
+RUN npm i --location=global yo pnpm @rushstack/heft
+RUN npm i --location=global @microsoft/generator-sharepoint@1.22.0
 
 CMD /bin/bash
