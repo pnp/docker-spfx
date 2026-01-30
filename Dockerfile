@@ -14,6 +14,6 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 USER spfx
 
 RUN npm i --location=global yo pnpm @rushstack/heft
-RUN npm i --location=global @microsoft/generator-sharepoint@1.22.0
+RUN npm i --location=global @microsoft/generator-sharepoint@1.22.1
 
 CMD /bin/bash

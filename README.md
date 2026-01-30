@@ -8,27 +8,27 @@ Docker images for running [SharePoint Framework](https://github.com/SharePoint/s
 
 ## Usage
 
-- in **Docker Settings > Shared Drives** verify that the drive where you create your projects is shared
+- in **Docker Settings > Resources > File sharing** verify that the drive where you create your projects is shared
 - Create a folder for your SharePoint Framework project
-- In the command line (on macOS):
+- In the command line on macOS/Linux
 
 ```sh
 cd [your project]
-docker run -it --rm --name ${PWD##*/} -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
+docker run -it --rm --name ${PWD##*/} --user $(id -u):$(id -g) -v $PWD:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx:latest
 ```
 
 - In PowerShell on Windows:
 
 ```PowerShell
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
+docker run -it --rm --name spfx-helloworld -v ${PWD}:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx:latest
 ```
 
 - In other shells on Windows
 
 ```cmd
 cd [your project]
-docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx
+docker run -it --rm --name spfx-helloworld -v %cd%:/usr/app/spfx -p 4321:4321 -p 35729:35729 m365pnp/spfx:latest
 ```
 
 After the container started you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
