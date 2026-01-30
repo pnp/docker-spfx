@@ -1,7 +1,7 @@
 ---
 name: spfx-release
 description: Automate SPFx version releases - updates files, commits, squashes, tags, and pushes
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Bash, Read, Edit, Grep
 argument-hint: [version]
 ---
