@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: docker/setup-buildx-action@v3
+        with:
+            cleanup: false
+      - uses: docker/bake-action@v6.10.0
+        with:
+          source: .
+          targets: default
+          push: false
+          set: |
+            *.cache-from=type=gha,scope=dockerspfx
+            *.cache-to=type=gha,scope=dockerspfx,mode=max
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v6
+      - uses: docker/setup-buildx-action@v3
+        with:
+          cleanup: false
+      - uses: docker/bake-action@v6.10.0
+        with:
+          source: .
+          targets: test
+          push: false
+          set: |
+            *.cache-from=type=gha,scope=dockerspfx
+            *.cache-to=type=gha,scope=dockerspfx,mode=max

@@ -1,4 +1,6 @@
-FROM node:22.16.0
+# ----------------- default (start) -----------------------
+
+FROM node:22.16.0 AS default
 
 EXPOSE 4321 35729
 
@@ -17,3 +19,38 @@ RUN npm i --location=global yo pnpm @rushstack/heft
 RUN npm i --location=global @microsoft/generator-sharepoint@1.22.2
 
 CMD /bin/bash
+
+# ----------------- default (end) ---------------------------
+
+
+# ----------------- test-base (start) -----------------------
+
+FROM default AS test-base
+
+RUN mkdir -p test/.pnpm-store
+WORKDIR test
+
+# ----------------- test-base (end) -----------------------
+
+
+# ----------------- test-webpart (start) ------------------
+
+FROM test-base AS test-webpart
+
+RUN yo @microsoft/sharepoint --component-type webpart \
+  --solution-name spfx-webpart \
+  --component-name HelloWorld \
+  --framework react \
+  --package-manager pnpm \
+  --skip-install
+
+WORKDIR spfx-webpart
+
+RUN --mount=type=cache,target=/usr/app/spfx/test/.pnpm-store,sharing=locked \
+  pnpm install
+
+RUN pnpm build
+
+WORKDIR ..
+
+# ----------------- test-webpart (end) ------------------
