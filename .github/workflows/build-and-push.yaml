@@ -52,3 +52,4 @@ jobs:
             ${{ vars.DOCKER_ORG }}/spfx:${{ env.docker_image_tag_name }}
             ${{ vars.DOCKER_ORG }}/spfx:latest
             ${{ vars.DOCKER_ORG }}/spfx:online
+          target: default
