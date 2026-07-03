@@ -1,6 +1,6 @@
 # ----------------- default (start) -----------------------
 
-FROM node:22.16.0 AS default
+FROM node:22.23.1 AS default
 
 EXPOSE 4321 35729
 
@@ -16,7 +16,12 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 USER spfx
 
 RUN npm i --location=global yo pnpm @rushstack/heft
-RUN npm i --location=global @microsoft/generator-sharepoint@1.23.0
+RUN npm i --location=global @microsoft/generator-sharepoint@1.23.2
+
+# pnpm 11 blocks dependency build scripts by default; SPFx projects (e.g. unrs-resolver)
+# rely on them. Allow them globally so `pnpm install` works for CI and end users.
+RUN mkdir -p /home/spfx/.config/pnpm && \
+    printf 'dangerouslyAllowAllBuilds: true\n' > /home/spfx/.config/pnpm/config.yaml
 
 CMD /bin/bash
 
