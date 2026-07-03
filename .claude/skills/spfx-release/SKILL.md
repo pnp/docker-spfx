@@ -20,9 +20,9 @@ Before making changes, verify:
 
 ## Steps to perform
 
-1. **Create a release branch** from the latest master:
+1. **Create a release branch** from the latest main:
    ```
-   git checkout master && git pull
+   git checkout main && git pull
    git checkout -b release/v$ARGUMENTS
    ```
    Branch name must be valid git (no spaces, no colons).
@@ -35,7 +35,7 @@ Before making changes, verify:
 
 3. **Commit changes** with message: `SPFx v$ARGUMENTS - new version updates`
 
-4. **Squash commits on the release branch** (release branch only — never on master, since unrelated commits between the last tag and HEAD would get folded in):
+4. **Squash commits on the release branch** (release branch only — never on main, since unrelated commits between the last tag and HEAD would get folded in):
    - Get the last tag: `git describe --tags --abbrev=0`
    - Soft reset to that tag: `git reset --soft <last-tag>`
    - Re-commit with the same message.
@@ -46,9 +46,9 @@ Before making changes, verify:
    gh pr create --title "feat: new SPFx version v$ARGUMENTS" --body "..."
    ```
 
-6. **After the PR merges**, create and push the tag against the merged commit on master:
+6. **After the PR merges**, create and push the tag against the merged commit on main:
    ```
-   git checkout master && git pull
+   git checkout main && git pull
    git tag v$ARGUMENTS
    git push origin v$ARGUMENTS
    ```

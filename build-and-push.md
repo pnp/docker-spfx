@@ -11,7 +11,7 @@
 ![Docker PAT result](assets/docker-pat.png)
 7. Open Environments in Settings of the Github project: https://github.com/pnp/docker-spfx/settings/environments
 8. Create a new invironment called `DockerHubProd`
-9. Add necessary protection to the environment. For example, you can choose `Protected branches only` so only commits merged to `master` branch will be able to have access for publishing images to Docker Hub
+9. Add necessary protection to the environment. For example, you can choose `Protected branches only` so only commits merged to `main` branch will be able to have access for publishing images to Docker Hub
 10. Create `DOCKER_ORG` environment variable and set value to `m365pnp`.
 11. Create `DOCKER_USERNAME` environment variable and set value that you got in the Docker page above.
 12. Create `DOCKER_PASSWORD` environment secret and set value that you got in the Docker page above.
