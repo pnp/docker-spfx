@@ -15,8 +15,9 @@ RUN useradd --create-home --shell /bin/bash spfx && \
 
 USER spfx
 
-RUN npm i --location=global yo pnpm @rushstack/heft
-RUN npm i --location=global @microsoft/generator-sharepoint@1.23.2
+RUN npm i --location=global yo pnpm @rushstack/heft && \
+    npm i --location=global @microsoft/generator-sharepoint@1.23.2 && \
+    npm cache clean --force
 
 # pnpm 11 blocks dependency build scripts by default; SPFx projects (e.g. unrs-resolver)
 # rely on them. Allow them via an env var so `pnpm install` works regardless of which
@@ -56,7 +57,7 @@ WORKDIR spfx-webpart
 RUN --mount=type=cache,target=/usr/app/spfx/test/.pnpm-store,sharing=locked \
   pnpm install
 
-RUN pnpm build
+RUN heft build
 
 WORKDIR ..
 
