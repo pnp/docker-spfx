@@ -26,7 +26,7 @@ RUN npm i --location=global yo pnpm @rushstack/heft && \
 # would be missed by the others.
 ENV pnpm_config_dangerously_allow_all_builds=true
 
-CMD /bin/bash
+CMD ["/bin/bash"]
 
 # ----------------- default (end) ---------------------------
 
