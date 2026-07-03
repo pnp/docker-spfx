@@ -8,7 +8,21 @@
       "Edit(/.claude/skills/spfx-release/**)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(gh release *)"
+      "Bash(gh release *)",
+      "Bash(gh pr create --base master --head chore/rename-default-branch-main --title 'chore: rename default branch from master to main' --body ' *)",
+      "Bash(gh pr *)",
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('renamed to:', d.get\\('name'\\), '| protected:', d.get\\('protected'\\)\\)\")",
+      "Bash(gh repo *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('rulesets:', [ \\(r.get\\('name'\\), r.get\\('target'\\)\\) for r in d] if isinstance\\(d,list\\) else d\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('deployment_branch_policy:', d.get\\('deployment_branch_policy'\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\([p.get\\('name'\\) for p in d.get\\('branch_policies',[]\\)] if isinstance\\(d,dict\\) else d\\)\")",
+      "Bash(gh workflow *)",
+      "Bash(gh run *)",
+      "Bash(docker buildx *)",
+      "Bash(chmod +x test-local.sh)",
+      "Bash(docker build *)",
+      "Bash(docker run *)"
     ]
   }
 }

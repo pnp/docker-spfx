@@ -49,9 +49,10 @@ You can also use this image for [Visual Studio development containers](./Develop
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.23.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.23.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release
 - **onprem**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
+- **1.23.2**: contains the SharePoint Framework Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release
 - **1.23.0**: contains the SharePoint Framework Yeoman generator from the [1.23.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23) release
 - **1.22.2**: contains the SharePoint Framework Yeoman generator from the [1.22.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.2) release
 - **1.22.1**: contains the SharePoint Framework Yeoman generator from the [1.22.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.1) release
