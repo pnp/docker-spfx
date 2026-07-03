@@ -1,0 +1,58 @@
+name: Legacy Image Build and Push
+
+# Rebuilds an older SPFx image on a newer Debian base so that the
+# glibc >= 2.28 requirement of the VS Code remote server is satisfied.
+#
+# This workflow publishes ONLY the version-specific Docker tag
+# (e.g. m365pnp/spfx:1.12.1).  It deliberately does NOT update the
+# "latest" or "online" floating tags, which always track the current
+# SPO release.
+#
+# Recommended Node.js base versions (all ship glibc 2.28):
+#   SPFx 1.12.x – 1.14.x  →  node:14.21.3
+#   SPFx 1.12.0            →  node:12.22.12-buster
+#   SPFx 1.9.1 – 1.11.0   →  node:10.24.1-buster
+#   SPFx 1.4.1 – 1.8.x    →  node:8.17.0-buster
+
+on:
+  workflow_dispatch:
+    inputs:
+      spfx_version:
+        description: 'SPFx generator version to publish (e.g. 1.12.1)'
+        required: true
+      node_version:
+        description: 'Node.js base image tag to use (e.g. 14.21.3)'
+        required: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: DockerHubProd
+    steps:
+      # For building the image we need to checkout the source code
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Set up Docker Buildx for multiplatform builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and push multiplatform legacy Docker image
+      # Only the version-specific tag is pushed; latest and online are NOT updated.
+      - name: Build and push legacy Docker image
+        uses: docker/build-push-action@v7
+        with:
+          file: Dockerfile.legacy
+          platforms: linux/amd64,linux/arm64/v8
+          push: true
+          build-args: |
+            NODE_VERSION=${{ inputs.node_version }}
+            SPFX_VERSION=${{ inputs.spfx_version }}
+          tags: ${{ vars.DOCKER_ORG }}/spfx:${{ inputs.spfx_version }}

@@ -1,0 +1,36 @@
+# ----------------- legacy (start) -----------------------
+# Parameterised Dockerfile for rebuilding older SPFx images on a newer
+# Debian base so that the glibc >= 2.28 requirement of the VS Code remote
+# server is satisfied.
+#
+# Build arguments
+#   NODE_VERSION  – Node.js image tag to use as base (e.g. 14.21.3)
+#   SPFX_VERSION  – @microsoft/generator-sharepoint version (e.g. 1.12.1)
+#
+# Example local build:
+#   docker build --build-arg NODE_VERSION=14.21.3 \
+#                --build-arg SPFX_VERSION=1.12.1  \
+#                -f Dockerfile.legacy -t spfx:1.12.1 .
+
+ARG NODE_VERSION
+FROM node:${NODE_VERSION}
+
+EXPOSE 5432 4321 35729
+
+ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
+  PATH=$PATH:/usr/app/.npm-global/bin
+
+VOLUME /usr/app/spfx
+WORKDIR /usr/app/spfx
+RUN useradd --create-home --shell /bin/bash spfx && \
+    usermod -aG sudo spfx && \
+    chown -R spfx:spfx /usr/app
+
+USER spfx
+
+ARG SPFX_VERSION
+RUN npm i -g gulp@4 yo @microsoft/generator-sharepoint@${SPFX_VERSION}
+
+CMD /bin/bash
+
+# ----------------- legacy (end) -------------------------
