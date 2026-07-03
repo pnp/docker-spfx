@@ -22,7 +22,9 @@
       "Bash(docker buildx *)",
       "Bash(chmod +x test-local.sh)",
       "Bash(docker build *)",
-      "Bash(docker run *)"
+      "Bash(docker run *)",
+      "Bash(gh issue *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('STATE:',d['state'],'DRAFT:',d['isDraft'],'MERGEABLE:',d['mergeable']\\); print\\('---BODY---'\\); print\\(d['body'][:3000]\\)\")"
     ]
   }
 }
