@@ -1,29 +1,27 @@
 # ----------------- default (start) -----------------------
 
-FROM node:22.23.1 AS default
+FROM node:26.12.1 AS default
 
 EXPOSE 4321 35729
 
 ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
   PATH=$PATH:/usr/app/.npm-global/bin
 
-VOLUME /usr/app/spfx
+# Run as the base image's `node` user (uid/gid 1000) so the README's
+# `--user $(id -u):$(id -g)` override usually maps to a real user with a HOME.
+RUN mkdir -p /usr/app/spfx && chown -R node:node /usr/app
+
+USER node
 WORKDIR /usr/app/spfx
-RUN useradd --create-home --shell /bin/bash spfx && \
-    usermod -aG sudo spfx && \
-    chown -R spfx:spfx /usr/app
+VOLUME /usr/app/spfx
 
-USER spfx
-
-RUN npm i --location=global yo pnpm @rushstack/heft && \
-    npm i --location=global @microsoft/generator-sharepoint@1.23.2 && \
+RUN npm i --location=global yo@7.0.1 @rushstack/heft@1.3.2 pnpm@12.16.1 yarn@1.22.22 && \
+    npm i --location=global @microsoft/generator-sharepoint@1.24.0 && \
     npm cache clean --force
 
-# pnpm 11 blocks dependency build scripts by default; SPFx projects (e.g. unrs-resolver)
+# pnpm 11+ blocks dependency build scripts by default; SPFx projects (e.g. unrs-resolver)
 # rely on them. Allow them via an env var so `pnpm install` works regardless of which
-# user the container runs as (CI's spfx user, the README's `--user $(id -u):$(id -g)`
-# override, or the devcontainer's `node` user) — a config file under one user's HOME
-# would be missed by the others.
+# user the container runs as — a config file under one user's HOME would be missed by others.
 ENV pnpm_config_dangerously_allow_all_builds=true
 
 CMD ["/bin/bash"]
@@ -35,7 +33,7 @@ CMD ["/bin/bash"]
 
 FROM default AS test-base
 
-RUN mkdir -p test/.pnpm-store
+RUN mkdir -p test/.npm-cache
 WORKDIR test
 
 # ----------------- test-base (end) -----------------------
@@ -49,13 +47,13 @@ RUN yo @microsoft/sharepoint --component-type webpart \
   --solution-name spfx-webpart \
   --component-name HelloWorld \
   --framework react \
-  --package-manager pnpm \
+  --package-manager npm \
   --skip-install
 
 WORKDIR spfx-webpart
 
-RUN --mount=type=cache,target=/usr/app/spfx/test/.pnpm-store,sharing=locked \
-  pnpm install
+RUN --mount=type=cache,target=/usr/app/spfx/test/.npm-cache,sharing=locked,uid=1000,gid=1000 \
+  npm install --cache /usr/app/spfx/test/.npm-cache
 
 RUN heft build
 

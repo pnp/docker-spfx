@@ -65,7 +65,7 @@ docker run --rm -it -p 4321:4321 -p 35729:35729 docker-spfx-00
 Run in the new container:
 
 ```sh
-cd /home/spfx
+cd ~
 yo @microsoft/sharepoint --solution-name helloworld --component-type webpart --component-name hello-world-webpart --component-description "HelloWorld web part" --is-domain-isolated false --framework none --environment spo --skip-feature-deployment false --no-insight
 cd helloworld/
 cat <<EOF | tee config/serve.json
