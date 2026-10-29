@@ -46,8 +46,8 @@ This option requires the following:
 ```json
 // For more information on how to run this SPFx project in a VS Code Remote Container, please visit https://aka.ms/spfx-devcontainer
 {
-	"name": "SPFx 1.23.2",
-	"image": "m365pnp/spfx:1.23.2",
+	"name": "SPFx 1.24.0",
+	"image": "m365pnp/spfx:1.24.0",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 	// Add the IDs of extensions you want installed when the container is created.

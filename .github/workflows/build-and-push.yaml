@@ -53,3 +53,14 @@ jobs:
             ${{ vars.DOCKER_ORG }}/spfx:latest
             ${{ vars.DOCKER_ORG }}/spfx:online
           target: default
+
+      # Sync README.md to the Docker Hub repository overview
+      - name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ vars.DOCKER_ORG }}/spfx
+          short-description: Docker images for SharePoint Framework
+          readme-filepath: ./README.md
+          enable-url-completion: true
