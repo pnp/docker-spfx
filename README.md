@@ -1,6 +1,6 @@
 # SharePoint Framework Docker images
 
-Docker images for running [SharePoint Framework](https://github.com/SharePoint/sp-dev-docs).
+Docker images for running [SharePoint Framework](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview).
 
 
 [![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
