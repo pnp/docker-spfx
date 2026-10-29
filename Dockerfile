@@ -1,6 +1,6 @@
 # ----------------- default (start) -----------------------
 
-FROM node:26.12.1 AS default
+FROM node:26.13.0 AS default
 
 EXPOSE 4321 35729
 
