@@ -1,0 +1,24 @@
+name: Update Docker Hub Description
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-description:
+    runs-on: ubuntu-latest
+    environment: DockerHubProd
+    steps:
+      # Checkout the branch or tag selected when running the workflow
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Sync README.md to the Docker Hub repository overview
+      - name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ vars.DOCKER_ORG }}/spfx
+          short-description: Docker images for SharePoint Framework
+          readme-filepath: ./README.md
+          enable-url-completion: true
