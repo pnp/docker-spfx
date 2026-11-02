@@ -119,6 +119,10 @@ docker run -it --rm --name ${PWD##*/} -u node -p 4321:4321 -p 35729:35729 -v "$P
 
 When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
 
+### pnpm projects fail to build in SharePoint Framework 1.24.0
+
+Projects scaffolded with `--package-manager pnpm` by generator 1.24.0 fail `heft build` with `TS2416: Property 'dataVersion' ... is not assignable`, because pnpm installs two copies of `@microsoft/sp-core-library`. npm-based projects are not affected.
+
 ### Can't access workbench and bundles in SharePoint Framework >=1.14.0
 
 When using the container with SharePoint Framework >=v1.14.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
