@@ -8,12 +8,15 @@ Docker images for running the [SharePoint Framework](https://learn.microsoft.com
 [![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
 [![Stars on Docker Hub](https://img.shields.io/docker/stars/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
 
+
 ## Usage
 
 - in **Docker Settings > Resources > File sharing** verify that the drive where you create your projects is shared
 - On Linux or WSL, create folder `~/.rushstack` once first — see [Trusting the development certificate](#trusting-the-development-certificate) for details
 - Create a folder for your SharePoint Framework project
-- Start the container **FROM THAT FOLDER** using the command for your hostshell, below
+- Start the container **FROM THAT FOLDER** using the command for your host shell, below 
+
+&nbsp;
 
 ### POSIX shell — bash, zsh, etc. (macOS, Linux, WSL)
 
