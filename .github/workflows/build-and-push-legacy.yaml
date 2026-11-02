@@ -1,0 +1,98 @@
+name: Legacy Image Build and Push
+
+# Rebuilds an older SPFx image on a newer Debian base so that the
+# glibc >= 2.28 requirement of the VS Code remote server is satisfied.
+#
+# This workflow publishes ONLY the version-specific Docker tag
+# (e.g. m365pnp/spfx:1.12.1).  It deliberately does NOT update the
+# "latest" or "online" floating tags, which always track the current
+# SPO release.
+#
+# How it works:
+#   1. Checks out the repository at the exact commit that originally
+#      introduced the requested SPFx version.
+#   2. Replaces the Node.js base image in that Dockerfile with a newer
+#      version that ships glibc >= 2.28, without touching any other line.
+#   3. Builds a multiplatform image and pushes the version tag to Docker Hub.
+
+on:
+  workflow_dispatch:
+    inputs:
+      spfx_version:
+        description: 'SPFx version to republish with glibc >= 2.28 base'
+        required: true
+        type: choice
+        options:
+          - '1.12.1'
+          - '1.13.0'
+          - '1.13.1'
+          - '1.14.0'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    environment: DockerHubProd
+    steps:
+      # Map the selected SPFx version to the commit that originally shipped it
+      # and the Node.js base that provides glibc >= 2.28.
+      - name: Resolve commit SHA and replacement Node base
+        id: resolve
+        run: |
+          case "${{ inputs.spfx_version }}" in
+            1.12.1)
+              echo "sha=26d5ef1a3df32d4ef9f3e5e5d6ef7246681ab7b2" >> $GITHUB_OUTPUT
+              echo "node_version=14.21.3" >> $GITHUB_OUTPUT
+              ;;
+            1.13.0)
+              echo "sha=6a901466c7f82cb764db57bca65e012c2dd0386c" >> $GITHUB_OUTPUT
+              echo "node_version=14.21.3" >> $GITHUB_OUTPUT
+              ;;
+            1.13.1)
+              echo "sha=67050928987fe36296afd373debb9eade5a97c76" >> $GITHUB_OUTPUT
+              echo "node_version=14.21.3" >> $GITHUB_OUTPUT
+              ;;
+            1.14.0)
+              echo "sha=227c1f4ffaf0e7314dbda79ce01b4df789f6d0cc" >> $GITHUB_OUTPUT
+              echo "node_version=14.21.3" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "Unknown version: ${{ inputs.spfx_version }}" >&2
+              exit 1
+              ;;
+          esac
+
+      # Check out the repository at the exact historical commit so that the
+      # Dockerfile used is the one that was originally shipped for this version.
+      - name: Checkout repository at legacy commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.resolve.outputs.sha }}
+
+      # Swap the FROM line to a Node.js image that ships glibc >= 2.28.
+      # All other lines are left exactly as they were in the original release.
+      - name: Update Node base image in Dockerfile
+        run: |
+          sed -i 's|^FROM node:.*|FROM node:${{ steps.resolve.outputs.node_version }}|' Dockerfile
+          echo "Updated Dockerfile FROM line:"
+          head -1 Dockerfile
+
+      # Set up Docker Buildx for multiplatform builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and push multiplatform image.
+      # Only the version-specific tag is pushed; latest and online are NOT updated.
+      - name: Build and push legacy Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64/v8
+          push: true
+          tags: ${{ vars.DOCKER_ORG }}/spfx:${{ inputs.spfx_version }}
