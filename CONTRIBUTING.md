@@ -53,13 +53,21 @@ Before contributing:
 ### Building from Dockerfile
 
 ```sh
-docker build --platform linux/amd64,linux/arm64 -t docker-spfx-00 .
+docker buildx build . --target default --load --tag docker-spfx-00
 ```
 
 ### Testing a new project
 
+On Linux or WSL, create the folder that stores the development certificate first. If Docker creates it instead, it's owned by root and the container can't write to it:
+
 ```sh
-docker run --rm -it -p 4321:4321 -p 35729:35729 docker-spfx-00
+mkdir -p ~/.rushstack
+```
+
+Then start the container, mounting `~/.rushstack` so the certificate is kept on your host:
+
+```sh
+docker run --rm -it -u node -p 4321:4321 -p 35729:35729 -v ~/.rushstack:/home/node/.rushstack docker-spfx-00
 ```
 
 Run in the new container:
@@ -77,30 +85,9 @@ cat <<EOF | tee config/serve.json
   "initialPage": "https://enter-your-SharePoint-site/_layouts/workbench.aspx"
 }
 EOF
-gulp trust-dev-cert
-gulp serve --nobrowser
+heft start --nobrowser
 ```
 
-Add the certificate to trusted certificates on your user profile (not wihin the container)
-
-For adding a certificate in Windows via code, you can use the following PS script:
-
-```powershell
-$tcpClient = New-Object -TypeName System.Net.Sockets.TcpClient;
-$tcpClient.Connect("localhost", 4321);
-$tcpStream = $tcpClient.GetStream();
-$callback = { param($sender, $cert, $chain, $errors) return $true };
-$sslStream = New-Object -TypeName System.Net.Security.SslStream -ArgumentList @($tcpStream, $true, $callback);
-$sslStream.AuthenticateAsClient('');
-$certificate = $SslStream.RemoteCertificate;
-$x509Certificate = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certificate
-$store = new-object System.Security.Cryptography.X509Certificates.X509Store(
-  [System.Security.Cryptography.X509Certificates.StoreName]::Root,
-  "CurrentUser"
-)
-$store.open("MaxAllowed");
-$store.add($x509Certificate);
-$store.close();
-```
+Trust the development certificate on your host (not within the container), using the commands in [Trusting the development certificate](./README.md#trusting-the-development-certificate).
 
 Open the workbench (like https://enter-your-SharePoint-site/_layouts/workbench.aspx) and add the web part.
