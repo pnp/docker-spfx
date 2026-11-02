@@ -15,7 +15,7 @@ ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
 # Install the SPFx environment
 RUN npm i --location=global yo@7.0.1 @rushstack/heft@1.3.2 && \
     npm i --location=global pnpm@12 yarn@1.22.22 && \
-    npm i --location=global @microsoft/generator-sharepoint@1.24.0 && \
+    npm i --location=global @microsoft/generator-sharepoint@1.24.1 && \
     npm cache clean --force
 
 # pnpm's default structure in node_module breaks the SPFx build rig. Using a "hoisted" layout fixes this.
