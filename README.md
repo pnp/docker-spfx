@@ -55,21 +55,21 @@ The `.rushstack` mount keeps the development certificate on your host, so it sur
    mkdir -p ~/.rushstack
    ```
 
-2. The first `heft start` creates a certificate authority at `~/.rushstack/rushstack-ca.pem`. Add it to your trusted root certificates using the command for where your solution lives:
+2. The first `heft start` creates a certificate authority in the `.rushstack` folder of the home directory mounted into the container. That's the home of the shell you ran `docker run` from. Add it to your trusted root certificates using the command for that shell:
 
-   - Solution in the WSL file system, from a WSL prompt (installs into the Windows certificate store):
+   - WSL prompt (installs into the Windows certificate store):
 
      ```sh
      certutil.exe -user -addstore Root "$(wslpath -w ~/.rushstack/rushstack-ca.pem)"
      ```
 
-   - Solution in the Windows file system, from PowerShell prompt (installs into the Windows certificate store):
+   - PowerShell prompt (installs into the Windows certificate store):
 
      ```PowerShell
      certutil -user -addstore Root "$HOME\.rushstack\rushstack-ca.pem"
      ```
 
-   - Solution in the macOS file system, from Terminal prompt (installs into your login keychain):
+   - macOS Terminal (installs into your login keychain):
 
      ```sh
      security add-trusted-cert -r trustRoot -k ~/Library/Keychains/login.keychain-db ~/.rushstack/rushstack-ca.pem
