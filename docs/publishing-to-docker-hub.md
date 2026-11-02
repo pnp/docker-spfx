@@ -8,7 +8,7 @@
 4. Select `Read & Write` in `Access permissions`
 5. Click `Generate`
 6. You will see the page with your user name and token string. You will need these attributes for the following steps.
-![Docker PAT result](assets/docker-pat.png)
+![Docker PAT result](../assets/docker-pat.png)
 7. Open Environments in Settings of the Github project: https://github.com/pnp/docker-spfx/settings/environments
 8. Create a new invironment called `DockerHubProd`
 9. Add necessary protection to the environment. For example, you can choose `Protected branches only` so only commits merged to `main` branch will be able to have access for publishing images to Docker Hub
@@ -18,7 +18,7 @@
 
 Here is how an example of how the result may look:
 
-![Github Environment Result](assets/github-environment.png)
+![Github Environment Result](../assets/github-environment.png)
 
 ## Triggering the build
 

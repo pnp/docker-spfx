@@ -11,10 +11,9 @@ target "default" {
 }
 
 
+# CI tests the npm path only; pnpm/yarn stages run via scripts/test-local.sh.
 target "test" {
-  targets = [
-    "test-webpart"
-  ]
+  target = "test-webpart"
   output = ["type=cacheonly"]
   platforms = [
     "linux/amd64",

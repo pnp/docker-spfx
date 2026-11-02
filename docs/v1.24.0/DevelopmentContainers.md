@@ -13,7 +13,7 @@ When you run in a development container in GitHub Codespaces, you do NOT need to
 
 - Node.js
 - yeoman
-- gulp
+- Heft
 - Docker
 - git
 
@@ -27,6 +27,7 @@ For using that option you need to have locally installed the following software:
 - [Visual Studio Code extension, Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 - Docker Engine
 - SPFx solution code, scaffolded in the root directory
+- On Linux or WSL, a `~/.rushstack` folder created before you first open the container (`mkdir -p ~/.rushstack`). If Docker creates it instead, it's owned by root and the container can't write the development certificate to it.
 
 ### GitHub Codespaces
 
@@ -70,6 +71,11 @@ This option requires the following:
 			"requireLocalPort": true
 		}
 	},
+	// Keep the development certificate on your host, so it survives container rebuilds and only has to be trusted once.
+	// Not available in GitHub Codespaces; remove this property there.
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.rushstack,target=/home/node/.rushstack,type=bind"
+	],
 	"postCreateCommand": "bash .devcontainer/spfx-startup.sh",
 	"remoteUser": "node"
 }
@@ -81,53 +87,30 @@ This option requires the following:
 echo
 echo -e "\e[1;94mInstalling Node dependencies\e[0m"
 npm install
-
-## commands to create dev certificate 
-echo
-echo -e "\e[1;94mGenerating dev certificate\e[0m"
-heft trust-dev-cert
 ```
 
 This is the structure that you should have:
 
-![Typical SPFx solution structure](./assets/vs-files.png)
+![Typical SPFx solution structure](../../assets/vs-files.png)
 
 ## Starting working with SPFx when you run Docker locally
 
 1. Open the folder in Visual Studio Code
 2. Click in the bottom left corner:
 
-![VS bottom left corner](./assets/VScorner.png)
+![VS bottom left corner](../../assets/VScorner.png)
 
 3. Select `Reopen in Container`:
 
-![Reopen in Container menu](./assets/vs-containers-selector.png)
+![Reopen in Container menu](../../assets/vs-containers-selector.png)
 
 4. Wait until the Node.js modules are installed:
 
-![Container Preparation Log](./assets/vs-log.png)
+![Container Preparation Log](../../assets/vs-log.png)
 
 5. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
-6. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
-
-```powershell
-$tcpClient = New-Object -TypeName System.Net.Sockets.TcpClient;
-$tcpClient.Connect("localhost", 4321);
-$tcpStream = $tcpClient.GetStream();
-$callback = { param($sender, $cert, $chain, $errors) return $true };
-$sslStream = New-Object -TypeName System.Net.Security.SslStream -ArgumentList @($tcpStream, $true, $callback);
-$sslStream.AuthenticateAsClient('');
-$certificate = $SslStream.RemoteCertificate;
-$x509Certificate = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certificate
-$store = new-object System.Security.Cryptography.X509Certificates.X509Store(
-    [System.Security.Cryptography.X509Certificates.StoreName]::Root,
-    "localmachine"
-)
-$store.open("MaxAllowed");
-$store.add($x509Certificate);
-$store.close();
-```
+6. Trust the development certificate on your host, using the commands in [Trusting the development certificate](../../README.md#trusting-the-development-certificate). The first `heft start` creates it at `~/.rushstack/rushstack-ca.pem`, which the `mounts` entry shares with your host.
 
 7. Now you should be able to access the workbench
 
@@ -136,23 +119,23 @@ $store.close();
 1. Open the project in GitHub site.
 2. Click `Code` button:
 
-![GitHub Code Button](./assets/github-code.png)
+![GitHub Code Button](../../assets/github-code.png)
 
 3. Click `Create codespace on ...` button:
 
-![GitHub Create codespace Button](./assets/github-create-space.png)
+![GitHub Create codespace Button](../../assets/github-create-space.png)
 
 4. Click `Open this codespace in VS Code Desktop`:
 
-![GitHub Open codespace Button](./assets/github-open-vs.png)
+![GitHub Open codespace Button](../../assets/github-open-vs.png)
 
 5. Confirm opening Visual Studio Code:
 
-![GitHub Open VS Code Warning](./assets/github-open-vs-confirm.png)
+![GitHub Open VS Code Warning](../../assets/github-open-vs-confirm.png)
 
 6. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
-7. Add the SSL certificate as trusted on your system. For example, if you use Windows, run the following PowerShell snippet:
+7. Trust the SSL certificate on your local machine. The codespace has no access to your local file system, so this snippet downloads the certificate from the forwarded port and adds it to your Windows certificate store. Because it trusts the server certificate rather than the certificate authority, run it again if Heft issues a new certificate:
 
 ```powershell
 $tcpClient = New-Object -TypeName System.Net.Sockets.TcpClient;
@@ -165,14 +148,14 @@ $certificate = $SslStream.RemoteCertificate;
 $x509Certificate = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList $certificate
 $store = new-object System.Security.Cryptography.X509Certificates.X509Store(
     [System.Security.Cryptography.X509Certificates.StoreName]::Root,
-    "localmachine"
+    "CurrentUser"
 )
 $store.open("MaxAllowed");
 $store.add($x509Certificate);
 $store.close();
 ```
 
-8. Now you should be able to access the workbench
+8. Restart the browser. Now you should be able to access the workbench
 
 ## Possible Issues
 
@@ -180,6 +163,6 @@ $store.close();
 
 Make sure that in Visual Studio Code local ports are allocated correspondingly:
 
-![VS local ports](./assets/vs-ports.png)
+![VS local ports](../../assets/vs-ports.png)
 
 If the local ports are busy with something else before you open the project in the development container, Visual Studio will allocate random ports instead.
