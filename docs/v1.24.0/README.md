@@ -1,6 +1,8 @@
 # SharePoint Framework Docker images
 
-Docker images for running [SharePoint Framework](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview).
+Docker images for running the [SharePoint Framework](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) development environment.
+
+> This README covers SharePoint Framework **1.24.0**.
 
 
 [![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
@@ -9,8 +11,8 @@ Docker images for running [SharePoint Framework](https://learn.microsoft.com/en-
 ## Usage
 
 - in **Docker Settings > Resources > File sharing** verify that the drive where you create your projects is shared
+- On Linux or WSL, create folder `~/.rushstack` once first — see [Trusting the development certificate](#trusting-the-development-certificate) for details
 - Create a folder for your SharePoint Framework project
-- On Linux or WSL, create `~/.rushstack` once first — see [Trusting the development certificate](#trusting-the-development-certificate)
 - Start the container **FROM THAT FOLDER** using the command for your hostshell, below
 
 ### POSIX shell — bash, zsh, etc. (macOS, Linux, WSL)
@@ -77,7 +79,7 @@ The `.rushstack` mount keeps the development certificate on your host, so it sur
 
 ### Listening on all interfaces
 
-Before running `heft start`, edit `config/serve.json` in your project so the dev server listens on all interfaces. By default it listens on `localhost` inside the container, which the published ports can't reach. Add `ipAddress`, and remove `hostname` (since it takes precedence over `ipAddress`):
+Before running `heft start`, edit `config/serve.json` in your project so the dev server listens on all interfaces. By default it listens on `localhost` inside the container, which the published ports can't reach. Add `ipAddress`, and remove `hostname` (since it takes precedence over `ipAddress`) as follows:
 
 ```json
 {
@@ -108,11 +110,7 @@ docker buildx build . --target default --load --tag my-spfx
 `--load` puts the image in your local image store so `docker run` can find it. Then start it with the command from [Usage](#usage) for your shell, replacing `m365pnp/spfx:1.24.0` with `my-spfx`. For example, in a POSIX shell:
 
 ```sh
-docker run -it --rm --name ${PWD##*/} -u node \
-  -p 4321:4321 -p 35729:35729 \
-  -v "$PWD":/usr/app/spfx \
-  -v ~/.rushstack:/home/node/.rushstack \
-  my-spfx
+docker run -it --rm --name ${PWD##*/} -u node -p 4321:4321 -p 35729:35729 -v "$PWD":/usr/app/spfx -v ~/.rushstack:/home/node/.rushstack my-spfx
 ```
 
 ## Known issues
@@ -120,10 +118,6 @@ docker run -it --rm --name ${PWD##*/} -u node \
 ### Unable to write files to disk
 
 When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
-
-### pnpm projects fail to build in SharePoint Framework 1.24.0
-
-Projects scaffolded with `--package-manager pnpm` by generator 1.24.0 fail `heft build` with `TS2416: Property 'dataVersion' ... is not assignable`, because pnpm installs two copies of `@microsoft/sp-core-library`. npm-based projects are not affected.
 
 ### Can't access workbench and bundles in SharePoint Framework >=1.14.0
 
