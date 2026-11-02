@@ -18,6 +18,12 @@ When a new SPFx version is released:
 
 Use the existing `docs/v1.24.0/` as the pattern.
 
+## Pull requests
+
+Before creating a PR, remind the user to run `./scripts/test-local.sh` and confirm it passes. It builds the default image, checks the pnpm linker, and builds the npm, pnpm, and yarn test stages.
+
+Open PRs as drafts unless the user asks for a ready-for-review PR.
+
 ## Releasing a new SPFx version
 
 Confirm with the user before any `git push`, PR creation, or tag push. Use `X.Y.Z` for the new version.
