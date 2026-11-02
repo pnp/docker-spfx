@@ -4,25 +4,25 @@ FROM node:26.13.0 AS default
 
 EXPOSE 4321 35729
 
-ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
-  PATH=$PATH:/usr/app/.npm-global/bin
-
-# Run as the base image's `node` user (uid/gid 1000) so the README's
-# `--user $(id -u):$(id -g)` override usually maps to a real user with a HOME.
+# Configure container to run as `node` (uid 1000) so files written to the mounted project belong to the host user.
 RUN mkdir -p /usr/app/spfx && chown -R node:node /usr/app
-
 USER node
 WORKDIR /usr/app/spfx
 VOLUME /usr/app/spfx
+ENV NPM_CONFIG_PREFIX=/usr/app/.npm-global \
+  PATH=$PATH:/usr/app/.npm-global/bin
 
-RUN npm i --location=global yo@7.0.1 @rushstack/heft@1.3.2 pnpm@12.16.1 yarn@1.22.22 && \
+# Install the SPFx environment
+RUN npm i --location=global yo@7.0.1 @rushstack/heft@1.3.2 && \
+    npm i --location=global pnpm@12 yarn@1.22.22 && \
     npm i --location=global @microsoft/generator-sharepoint@1.24.0 && \
     npm cache clean --force
 
-# pnpm 11+ blocks dependency build scripts by default; SPFx projects (e.g. unrs-resolver)
-# rely on them. Allow them via an env var so `pnpm install` works regardless of which
-# user the container runs as — a config file under one user's HOME would be missed by others.
-ENV pnpm_config_dangerously_allow_all_builds=true
+# pnpm's default structure in node_module breaks the SPFx build rig. Using a "hoisted" layout fixes this.
+ENV pnpm_config_node_linker=hoisted
+
+# pnpm 11+ blocks dependency build scripts; SPFx 1.23.0+ needs unrs-resolver's scripts, so adding an allowBuilds to the pnpm config settings to prevent errors.
+RUN mkdir -p $HOME/.config/pnpm && printf 'allowBuilds:\n  unrs-resolver: true\n' > $HOME/.config/pnpm/config.yaml
 
 CMD ["/bin/bash"]
 
@@ -60,3 +60,37 @@ RUN heft build
 WORKDIR ..
 
 # ----------------- test-webpart (end) ------------------
+
+
+# ----------------- test-webpart-pnpm (start) -------------
+
+FROM test-base AS test-webpart-pnpm
+
+RUN yo @microsoft/sharepoint --component-type webpart \
+  --solution-name spfx-webpart \
+  --component-name HelloWorld \
+  --framework react \
+  --package-manager pnpm
+
+WORKDIR spfx-webpart
+
+RUN heft build
+
+# ----------------- test-webpart-pnpm (end) ---------------
+
+
+# ----------------- test-webpart-yarn (start) -------------
+
+FROM test-base AS test-webpart-yarn
+
+RUN yo @microsoft/sharepoint --component-type webpart \
+  --solution-name spfx-webpart \
+  --component-name HelloWorld \
+  --framework react \
+  --package-manager yarn
+
+WORKDIR spfx-webpart
+
+RUN heft build
+
+# ----------------- test-webpart-yarn (end) ---------------
