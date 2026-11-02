@@ -3,9 +3,6 @@
     "allow": [
       "Bash(git tag *)",
       "Bash(git push *)",
-      "Skill(spfx-release)",
-      "Skill(spfx-release:*)",
-      "Edit(/.claude/skills/spfx-release/**)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(gh release *)",
@@ -20,7 +17,7 @@
       "Bash(gh workflow *)",
       "Bash(gh run *)",
       "Bash(docker buildx *)",
-      "Bash(chmod +x test-local.sh)",
+      "Bash(chmod +x scripts/test-local.sh)",
       "Bash(docker build *)",
       "Bash(docker run *)",
       "Bash(gh issue *)",
