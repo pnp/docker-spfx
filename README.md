@@ -18,7 +18,7 @@ Docker images for running the [SharePoint Framework](https://learn.microsoft.com
 
 &nbsp;
 
-#### POSIX shell — bash, zsh, etc. (macOS, Linux, WSL)
+### POSIX shell — bash, zsh, etc. (macOS, Linux, WSL)
 
 ```sh
 docker run -it --rm --name ${PWD##*/} -u node -p 4321:4321 -p 35729:35729 -v "$PWD":/usr/app/spfx -v ~/.rushstack:/home/node/.rushstack m365pnp/spfx:latest
