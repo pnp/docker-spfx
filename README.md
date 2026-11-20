@@ -2,7 +2,7 @@
 
 Docker images for running the [SharePoint Framework](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) development environment.
 
-> This README covers the **latest** SharePoint Framework version. For instructions for other versions, see the [versioned docs folder](https://github.com/pnp/docker-spfx/tree/main/docs) on GitHub.
+> This README covers the **latest** SharePoint Framework version (1.24.2). For instructions for other versions, see the [versioned docs folder](https://github.com/pnp/docker-spfx/tree/main/docs) on GitHub.
 
 
 [![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)

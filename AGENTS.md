@@ -42,7 +42,7 @@ Steps:
    `git checkout main && git pull && git checkout -b release/vX.Y.Z`
 2. Update the version:
    - `Dockerfile`: the `@microsoft/generator-sharepoint` version.
-   - `README.md`: in the Available tags section, update `latest` and `online` and add a row for `X.Y.Z`.
+   - `README.md`: the version in parentheses in the note under the title, and in the Available tags section update `latest` and `online` and add a row for `X.Y.Z`.
    - `README.md`: the Visual Studio development containers link points to `docs/vX.Y.Z/DevelopmentContainers.md`.
    - Run `grep -rn "<old-version>"` to catch any other references.
 3. Create the versioned docs folder as described in "Versioned docs" above.
@@ -52,4 +52,10 @@ Steps:
    - Soft reset to it: `git reset --soft <last-tag>`
    - Commit again with the same message.
 6. Push the branch and open a PR: `git push -u origin release/vX.Y.Z`, then `gh pr create --title "feat: new SPFx version vX.Y.Z"`.
-7. After the PR merges, tag the merged commit on main: `git checkout main && git pull && git tag vX.Y.Z && git push origin vX.Y.Z`.
+7. After the PR merges, tag the merged commit on main: `git checkout main && git pull && git tag vX.Y.Z && git push origin vX.Y.Z`. Pushing the tag is what publishes the release (see "CI flow" below). Never tag the release branch: the repo squash-merges, so a tag there points at a commit that isn't on main, and pushing it would publish an image before review.
+
+## CI flow
+
+- `ci.yml` runs on PRs and pushes to main that touch `Dockerfile`, `docker-bake.hcl`, or itself. It builds the test stages and does not publish anything. For any other change, `ci-skip.yml` reports the same required `build` and `test` checks as passed without building. The path lists in the two files must stay identical.
+- `build-and-push.yaml` runs only when a `vX.Y.Z` tag is pushed. It builds the multiplatform image and pushes it to Docker Hub as `X.Y.Z`, `latest`, and `online`. Merging a PR does not trigger it.
+- `update-dockerhub-description.yaml` runs automatically after a successful "Image Build and Push" and syncs the root `README.md` to the Docker Hub repository overview. It can also be run manually from the Actions tab.
