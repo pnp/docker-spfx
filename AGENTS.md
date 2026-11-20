@@ -26,6 +26,18 @@ Before creating a PR, remind the user to run `./scripts/test-local.sh` and confi
 
 Open PRs as drafts unless the user asks for a ready-for-review PR.
 
+### After a merge that doesn't publish
+
+A merge publishes to Docker Hub only when it changes the SPFx version in `Dockerfile` (see "CI flow"). After any other merge to main, ask the user whether the latest version tag should move to the new merge commit, so the tag reflects the current state of the repo. Find it with `git describe --tags --abbrev=0` on main. This applies only to the latest tag; never move an older version's tag.
+
+If they say yes, give them these commands to run. Moving the tag re-runs the image build, which overwrites the same image tags on Docker Hub and re-syncs the description:
+
+```sh
+git checkout main && git pull
+git tag -f vX.Y.Z
+git push --force origin vX.Y.Z
+```
+
 ## Releasing a new SPFx version
 
 Confirm with the user before any `git push`, PR creation, or tag push. Use `X.Y.Z` for the new version.
@@ -52,10 +64,10 @@ Steps:
    - Soft reset to it: `git reset --soft <last-tag>`
    - Commit again with the same message.
 6. Push the branch and open a PR: `git push -u origin release/vX.Y.Z`, then `gh pr create --title "feat: new SPFx version vX.Y.Z"`.
-7. After the PR merges, tag the merged commit on main: `git checkout main && git pull && git tag vX.Y.Z && git push origin vX.Y.Z`. Pushing the tag is what publishes the release (see "CI flow" below). Never tag the release branch: the repo squash-merges, so a tag there points at a commit that isn't on main, and pushing it would publish an image before review.
+7. Merging the PR publishes the release (see "CI flow" below): the image build runs because the Dockerfile changed, pushes the image, creates the `vX.Y.Z` tag on the merge commit, and the Docker Hub description updates. Watch the Actions tab and confirm the tag and image appeared. Never tag by hand before the merge: the repo squash-merges, so a tag on the release branch points at a commit that isn't on main. To re-publish an existing version, push its tag by hand: `git push origin vX.Y.Z`.
 
 ## CI flow
 
-- `ci.yml` runs on PRs and pushes to main that touch `Dockerfile`, `docker-bake.hcl`, or itself. It builds the test stages and does not publish anything. For any other change, `ci-skip.yml` reports the same required `build` and `test` checks as passed without building. The path lists in the two files must stay identical.
-- `build-and-push.yaml` runs only when a `vX.Y.Z` tag is pushed. It builds the multiplatform image and pushes it to Docker Hub as `X.Y.Z`, `latest`, and `online`. Merging a PR does not trigger it.
-- `update-dockerhub-description.yaml` runs automatically after a successful "Image Build and Push" and syncs the root `README.md` to the Docker Hub repository overview. It can also be run manually from the Actions tab.
+- `ci.yml` runs on every PR and push to main. A `changes` job checks whether `Dockerfile`, `docker-bake.hcl`, or the workflow itself changed; only then do the `build` and `test` jobs run. Otherwise they're skipped, which GitHub counts as a passing required check. It does not publish anything.
+- `build-and-push.yaml` runs on a push to main that changes `Dockerfile`, and on a `vX.Y.Z` tag push. On a main push it reads the SPFx version from the Dockerfile and stops if that version's tag already exists. Otherwise it builds the multiplatform image, pushes it to Docker Hub as `X.Y.Z`, `latest`, and `online`, and then creates the tag on the merge commit. The tag is created in the same run because a tag pushed with `GITHUB_TOKEN` does not trigger other workflows.
+- `update-dockerhub-description.yaml` syncs the root `README.md` to the Docker Hub repository overview. It runs after a successful "Image Build and Push", and on a push to main that changes `README.md` without changing `Dockerfile`. It can also be run manually from the Actions tab.
