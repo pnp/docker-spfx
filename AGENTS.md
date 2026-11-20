@@ -26,6 +26,18 @@ Before creating a PR, remind the user to run `./scripts/test-local.sh` and confi
 
 Open PRs as drafts unless the user asks for a ready-for-review PR.
 
+### After a merge that doesn't publish
+
+A merge publishes to Docker Hub only when it changes the SPFx version in `Dockerfile` (see "CI flow"). After any other merge to main, ask the user whether the latest version tag should move to the new merge commit, so the tag reflects the current state of the repo. Find it with `git describe --tags --abbrev=0` on main. This applies only to the latest tag; never move an older version's tag.
+
+If they say yes, give them these commands to run. Moving the tag re-runs the image build, which overwrites the same image tags on Docker Hub and re-syncs the description:
+
+```sh
+git checkout main && git pull
+git tag -f vX.Y.Z
+git push --force origin vX.Y.Z
+```
+
 ## Releasing a new SPFx version
 
 Confirm with the user before any `git push`, PR creation, or tag push. Use `X.Y.Z` for the new version.
