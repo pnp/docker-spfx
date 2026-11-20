@@ -4,19 +4,21 @@ Shared instructions for AI coding agents (Claude Code, Codex, GitHub Copilot) wo
 
 ## Versioned docs
 
-The root `README.md` and `docs/DevelopmentContainers.md` always track the latest SPFx version.
+The root `README.md` always tracks the latest SPFx version. There is no root `DevelopmentContainers.md`; each `docs/vX.Y.Z/` folder has its own, and the root README's development containers link points to the latest version's copy.
 
 When a new SPFx version is released:
 
 1. Create `docs/vX.Y.Z/`.
-2. Copy the current `README.md` and `docs/DevelopmentContainers.md` into it.
+2. Copy the current `README.md` and the previous version's `docs/DevelopmentContainers.md` into it.
 3. In the copies, change every reference of "latest" to the version:
    - Image tags: `m365pnp/spfx:latest` becomes `m365pnp/spfx:X.Y.Z`. The build pushes each git tag `vX.Y.Z` as image tag `X.Y.Z`.
    - Tag list entries: a `**latest**` entry becomes `**X.Y.Z**`. Remove any duplicate line for that version.
-4. Fix relative links for the deeper path: `../assets/` becomes `../../assets/`, and `../README.md` becomes `../../README.md`.
-5. Check that every relative link resolves.
+   - The note under the title becomes `> This README covers SharePoint Framework **X.Y.Z**.` followed by a line pointing to the other versions: `> For instructions for other versions, see the versioned docs folder on GitHub: https://github.com/pnp/docker-spfx/tree/main/docs`
+4. In the README copy, every link must be an absolute URL. The README is used as the image description on Docker Hub, where no other repo files are available. The development containers link becomes `https://github.com/pnp/docker-spfx/blob/main/docs/vX.Y.Z/DevelopmentContainers.md`.
+5. In the DevelopmentContainers copy, update the two-line note under the title to `> This document covers SharePoint Framework **X.Y.Z**.`, and update the devcontainer.json example (`name` and `image`). Its relative links already use the deeper path: `../../assets/` and `../../README.md`.
+6. Check that every relative link resolves and that the README copy has no relative links.
 
-Use the existing `docs/v1.24.0/` as the pattern.
+Use the existing `docs/v1.24.2/` as the pattern.
 
 ## Pull requests
 
@@ -31,7 +33,7 @@ Confirm with the user before any `git push`, PR creation, or tag push. Use `X.Y.
 Pre-flight checks:
 
 1. The working tree is clean (`git status`). If there are unrelated uncommitted changes, stop and ask the user.
-2. The new version isn't already in `Dockerfile`, `README.md`, or `docs/DevelopmentContainers.md`. If it is, the release may already be in progress; ask before continuing.
+2. The new version isn't already in `Dockerfile` or `README.md`. If it is, the release may already be in progress; ask before continuing.
 3. The tag `vX.Y.Z` doesn't exist locally or on origin (`git tag --list`, `git ls-remote --tags origin`).
 
 Steps:
@@ -41,7 +43,7 @@ Steps:
 2. Update the version:
    - `Dockerfile`: the `@microsoft/generator-sharepoint` version.
    - `README.md`: in the Available tags section, update `latest` and `online` and add a row for `X.Y.Z`.
-   - `docs/DevelopmentContainers.md`: the devcontainer.json example.
+   - `README.md`: the Visual Studio development containers link points to `docs/vX.Y.Z/DevelopmentContainers.md`.
    - Run `grep -rn "<old-version>"` to catch any other references.
 3. Create the versioned docs folder as described in "Versioned docs" above.
 4. Commit with the message `SPFx vX.Y.Z - new version updates`.

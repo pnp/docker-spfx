@@ -100,7 +100,7 @@ To close the container, run the following command from the container prompt:
 exit
 ```
 
-You can also use this image to build an environment for [Visual Studio development containers](https://github.com/pnp/docker-spfx/blob/main/docs/DevelopmentContainers.md)
+You can also use this image to build an environment for [Visual Studio development containers](https://github.com/pnp/docker-spfx/blob/main/docs/v1.24.2/DevelopmentContainers.md)
 
 ## Building the image locally
 
@@ -221,9 +221,10 @@ Windows 10 Anniversary Update and Windows Server 2016 have native support for co
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.24.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.1) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.24.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.1) release
+- **latest**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
+- **online**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
 - **onprem**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
+- **1.24.2**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
 - **1.24.1**: contains the SharePoint Framework Yeoman generator from the [1.24.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.1) release
 - **1.24.0**: contains the SharePoint Framework Yeoman generator from the [1.24.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.0) release
 - **1.23.2**: contains the SharePoint Framework Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release

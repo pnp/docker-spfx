@@ -97,7 +97,7 @@ To close the container, run the following command from the container prompt:
 exit
 ```
 
-You can also use this image to build an environment for [Visual Studio development containers](DevelopmentContainers.md)
+You can also use this image to build an environment for [Visual Studio development containers](https://github.com/pnp/docker-spfx/blob/main/docs/v1.24.0/DevelopmentContainers.md)
 
 ## Building the image locally
 

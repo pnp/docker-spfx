@@ -1,5 +1,8 @@
 # Using m365pnp/spfx Image in Visual Studio Development Containers
 
+> This document covers SharePoint Framework **1.24.2**.
+> For instructions for other versions, see the versioned docs folder on GitHub: https://github.com/pnp/docker-spfx/tree/main/docs
+
 Visual Studio Code development containers allows you to work with SPFx solutions in containers that Visual Studio will run automatically for you so you don't need to care running `docker run`. In this it is also easier to make sure that all members of the project are using the same development environment.
 
 ## Prerequisites
@@ -47,8 +50,8 @@ This option requires the following:
 ```json
 // For more information on how to run this SPFx project in a VS Code Remote Container, please visit https://aka.ms/spfx-devcontainer
 {
-	"name": "SPFx 1.24.1",
-	"image": "m365pnp/spfx:1.24.1",
+	"name": "SPFx 1.24.2",
+	"image": "m365pnp/spfx:1.24.2",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
 	// Add the IDs of extensions you want installed when the container is created.
@@ -91,26 +94,26 @@ npm install
 
 This is the structure that you should have:
 
-![Typical SPFx solution structure](../assets/vs-files.png)
+![Typical SPFx solution structure](../../assets/vs-files.png)
 
 ## Starting working with SPFx when you run Docker locally
 
 1. Open the folder in Visual Studio Code
 2. Click in the bottom left corner:
 
-![VS bottom left corner](../assets/VScorner.png)
+![VS bottom left corner](../../assets/VScorner.png)
 
 3. Select `Reopen in Container`:
 
-![Reopen in Container menu](../assets/vs-containers-selector.png)
+![Reopen in Container menu](../../assets/vs-containers-selector.png)
 
 4. Wait until the Node.js modules are installed:
 
-![Container Preparation Log](../assets/vs-log.png)
+![Container Preparation Log](../../assets/vs-log.png)
 
 5. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
-6. Trust the development certificate on your host, using the commands in [Trusting the development certificate](../README.md#trusting-the-development-certificate). The first `heft start` creates it at `~/.rushstack/rushstack-ca.pem`, which the `mounts` entry shares with your host.
+6. Trust the development certificate on your host, using the commands in [Trusting the development certificate](../../README.md#trusting-the-development-certificate). The first `heft start` creates it at `~/.rushstack/rushstack-ca.pem`, which the `mounts` entry shares with your host.
 
 7. Now you should be able to access the workbench
 
@@ -119,19 +122,19 @@ This is the structure that you should have:
 1. Open the project in GitHub site.
 2. Click `Code` button:
 
-![GitHub Code Button](../assets/github-code.png)
+![GitHub Code Button](../../assets/github-code.png)
 
 3. Click `Create codespace on ...` button:
 
-![GitHub Create codespace Button](../assets/github-create-space.png)
+![GitHub Create codespace Button](../../assets/github-create-space.png)
 
 4. Click `Open this codespace in VS Code Desktop`:
 
-![GitHub Open codespace Button](../assets/github-open-vs.png)
+![GitHub Open codespace Button](../../assets/github-open-vs.png)
 
 5. Confirm opening Visual Studio Code:
 
-![GitHub Open VS Code Warning](../assets/github-open-vs-confirm.png)
+![GitHub Open VS Code Warning](../../assets/github-open-vs-confirm.png)
 
 6. Type `heft start --nobrowser` in the Visual Studio Code terminal
 
@@ -163,6 +166,6 @@ $store.close();
 
 Make sure that in Visual Studio Code local ports are allocated correspondingly:
 
-![VS local ports](../assets/vs-ports.png)
+![VS local ports](../../assets/vs-ports.png)
 
 If the local ports are busy with something else before you open the project in the development container, Visual Studio will allocate random ports instead.
