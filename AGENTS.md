@@ -56,6 +56,6 @@ Steps:
 
 ## CI flow
 
-- `ci.yml` runs on every PR and push to main. It builds the test stages and does not publish anything.
+- `ci.yml` runs on PRs and pushes to main that touch `Dockerfile`, `docker-bake.hcl`, or itself. It builds the test stages and does not publish anything. For any other change, `ci-skip.yml` reports the same required `build` and `test` checks as passed without building. The path lists in the two files must stay identical.
 - `build-and-push.yaml` runs only when a `vX.Y.Z` tag is pushed. It builds the multiplatform image and pushes it to Docker Hub as `X.Y.Z`, `latest`, and `online`. Merging a PR does not trigger it.
 - `update-dockerhub-description.yaml` runs automatically after a successful "Image Build and Push" and syncs the root `README.md` to the Docker Hub repository overview. It can also be run manually from the Actions tab.

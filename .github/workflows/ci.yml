@@ -1,12 +1,23 @@
 name: ci
 
+# The image depends only on these files (the Dockerfile has no COPY/ADD), so
+# other changes skip the build. ci-skip.yml reports the same required checks
+# as passed for those changes. Keep both path lists identical.
 on:
   push:
     branches:
       - main
+    paths:
+      - Dockerfile
+      - docker-bake.hcl
+      - .github/workflows/ci.yml
   pull_request:
     branches:
       - main
+    paths:
+      - Dockerfile
+      - docker-bake.hcl
+      - .github/workflows/ci.yml
 
 jobs:
   build:
