@@ -5,13 +5,19 @@ on:
   workflow_run:
     workflows: ["Image Build and Push"]
     types: [completed]
+  # Run when a merge to main changes the README without a release
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
   # Or run manually against any branch or tag
   workflow_dispatch:
 
 jobs:
   update-description:
     # Skip when the triggering image build failed or was cancelled
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment: DockerHubProd
     steps:
@@ -21,8 +27,21 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
+      # On a push, check whether the Dockerfile changed too. If it did, the
+      # image build runs for this commit and triggers this workflow on
+      # completion, so skip here to avoid a second run.
+      - name: Check for Dockerfile changes
+        if: github.event_name == 'push'
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            dockerfile:
+              - Dockerfile
+
       # Sync README.md to the Docker Hub repository overview
       - name: Update Docker Hub description
+        if: github.event_name != 'push' || steps.changes.outputs.dockerfile != 'true'
         uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ vars.DOCKER_USERNAME_DESCRIPTION }}
