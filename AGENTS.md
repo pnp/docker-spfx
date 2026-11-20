@@ -42,7 +42,7 @@ Steps:
    `git checkout main && git pull && git checkout -b release/vX.Y.Z`
 2. Update the version:
    - `Dockerfile`: the `@microsoft/generator-sharepoint` version.
-   - `README.md`: in the Available tags section, update `latest` and `online` and add a row for `X.Y.Z`.
+   - `README.md`: the version in parentheses in the note under the title, and in the Available tags section update `latest` and `online` and add a row for `X.Y.Z`.
    - `README.md`: the Visual Studio development containers link points to `docs/vX.Y.Z/DevelopmentContainers.md`.
    - Run `grep -rn "<old-version>"` to catch any other references.
 3. Create the versioned docs folder as described in "Versioned docs" above.
