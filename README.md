@@ -1,8 +1,8 @@
-# SharePoint Framework Docker images
+# SharePoint Framework (SPFx) Docker images
 
-Docker images for running the [SharePoint Framework](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) development environment.
+Docker images for running the [SPFx](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) development environment.
 
-> This README covers the **latest** SharePoint Framework version (1.24.2). For instructions for other versions, see the [versioned docs folder](https://github.com/pnp/docker-spfx/tree/main/docs) on GitHub.
+> This README covers the **latest** SPFx version (1.24.2). For instructions for other versions, see the [versioned docs folder](https://github.com/pnp/docker-spfx/tree/main/docs) on GitHub.
 
 
 [![Pulls from Docker Hub](https://img.shields.io/docker/pulls/m365pnp/spfx.svg)](https://hub.docker.com/r/m365pnp/spfx)
@@ -13,7 +13,7 @@ Docker images for running the [SharePoint Framework](https://learn.microsoft.com
 
 - in **Docker Settings > Resources > File sharing** verify that the drive where you create your projects is shared
 - On Linux or WSL, create folder `~/.rushstack` once first — see [Trusting the development certificate](#trusting-the-development-certificate) for details
-- Create a folder for your SharePoint Framework project
+- Create a folder for your SPFx project
 - Start the container **FROM THAT FOLDER** using the command for your host shell, below 
 
 &nbsp;
@@ -40,7 +40,7 @@ docker run -it --rm --name spfx-helloworld -u node -p 4321:4321 -p 35729:35729 -
 
 ### Working in the container
 
-After the container starts, you can work with it the same way you would work with SharePoint Framework installed on your host. To create a new SharePoint Framework project in the container command line execute:
+After the container starts, you can work with it the same way you would work with SPFx installed on your host. To create a new SPFx project in the container command line execute:
 
 ```sh
 yo @microsoft/sharepoint
@@ -122,9 +122,9 @@ docker run -it --rm --name ${PWD##*/} -u node -p 4321:4321 -p 35729:35729 -v "$P
 
 When running `yo @microsoft/sharepoint` you get an error that the container is unable to write files to the disk. In most cases this is caused by the drive not being shared in Docker. Go to Docker > Settings > Sharing to enable sharing the drive where your project is located.
 
-### Can't access workbench and bundles in SharePoint Framework >=1.14.0
+### Can't access workbench and bundles in SPFx >=1.14.0
 
-When using the container with SharePoint Framework >=v1.14.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
+When using the container with SPFx >=v1.14.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SPFx project to:
 
 ```json
 {
@@ -136,9 +136,9 @@ When using the container with SharePoint Framework >=v1.14.0, you can't access t
 
 If `serve.json` also contains a `hostname` property, remove it: it takes precedence over `ipAddress`. Keep browsing to `https://localhost:4321` from the host.
 
-### Can't access workbench and bundles in SharePoint Framework >=1.6.0 <=1.13.1
+### Can't access workbench and bundles in SPFx >=1.6.0 <=1.13.1
 
-When using the container with SharePoint Framework >=v1.6.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SharePoint Framework project to:
+When using the container with SPFx >=v1.6.0, you can't access the local workbench or can't load bundles in the hosted workbench. This is caused by the default mapping of the workbench to localhost, which isn't accessible outside of the container. To fix it, map the workbench to `0.0.0.0`, by modifying the `./config/serve.json` file in your SPFx project to:
 
 ```json
 {
@@ -148,7 +148,7 @@ When using the container with SharePoint Framework >=v1.6.0, you can't access th
 }
 ```
 
-### Can't access bundles in SharePoint Framework 1.13.1
+### Can't access bundles in SPFx 1.13.1
 
 Modify `node_modules\@microsoft\spfx-heft-plugins\lib\plugins\webpackConfigurationPlugin\WebpackConfigurationGenerator.js:393`
 
@@ -162,7 +162,7 @@ to:
 const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://localhost:${serveConfig.port || 4321}/${distFolderName}/`;
 ```
 
-### Can't access bundles in SharePoint Framework 1.12.1
+### Can't access bundles in SPFx 1.12.1
 
 Modify `node_modules\@microsoft\spfx-heft-plugins\lib\plugins\webpackConfigurationPlugin\WebpackConfigurationGenerator.js:376`
 
@@ -176,9 +176,9 @@ to:
 const debugBaseUrl = `${serveConfig.https ? 'https' : 'http'}://localhost:${serveConfig.port || 4321}/dist/`;
 ```
 
-### Can't access workbench and bundles in SharePoint Framework >=1.6.0 <=1.11.0 on Windows
+### Can't access workbench and bundles in SPFx >=1.6.0 <=1.11.0 on Windows
 
-When using the container with SharePoint Framework >=v1.6.0 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
+When using the container with SPFx >=v1.6.0 on Windows, you can't access the local workbench despite following the steps from the previous section. This has to do with Windows being unable to correctly access 0.0.0.0. To fix it, first, modify `config\write-manifests.json` to (add the `debugBasePath` property):
 
 ```json
 {
@@ -221,62 +221,62 @@ Windows 10 Anniversary Update and Windows Server 2016 have native support for co
 
 ## Available tags
 
-- **latest**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
-- **online**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
-- **onprem**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
-- **1.24.2**: contains the SharePoint Framework Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
-- **1.24.1**: contains the SharePoint Framework Yeoman generator from the [1.24.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.1) release
-- **1.24.0**: contains the SharePoint Framework Yeoman generator from the [1.24.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.0) release
-- **1.23.2**: contains the SharePoint Framework Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release
-- **1.23.0**: contains the SharePoint Framework Yeoman generator from the [1.23.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23) release
-- **1.22.2**: contains the SharePoint Framework Yeoman generator from the [1.22.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.2) release
-- **1.22.1**: contains the SharePoint Framework Yeoman generator from the [1.22.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.1) release
-- **1.22.0**: contains the SharePoint Framework Yeoman generator from the [1.22.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22) release
-- **1.21.1**: contains the SharePoint Framework Yeoman generator from the [1.21.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21.1) release
-- **1.21.0**: contains the SharePoint Framework Yeoman generator from the [1.21.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21) release
-- **1.20.0**: contains the SharePoint Framework Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20) release
-- **1.19.0**: contains the SharePoint Framework Yeoman generator from the [1.19.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.19) release
-- **1.18.2**: contains the SharePoint Framework Yeoman generator from the [1.18.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.2) release
-- **1.18.1**: contains the SharePoint Framework Yeoman generator from the [1.18.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.1) release
-- **1.18.0**: contains the SharePoint Framework Yeoman generator from the [1.18.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18) release
-- **1.17.4**: contains the SharePoint Framework Yeoman generator from the [1.17.4](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.4) release
-- **1.17.3**: contains the SharePoint Framework Yeoman generator from the [1.17.3](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.3) release
-- **1.17.2**: contains the SharePoint Framework Yeoman generator from the [1.17.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.2) release
-- **1.17.1**: contains the SharePoint Framework Yeoman generator from the [1.17.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.1) release
-- **1.17.0**: contains the SharePoint Framework Yeoman generator from the [1.17.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17) release
-- **1.16.1**: contains the SharePoint Framework Yeoman generator from the [1.16.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.16.1) release
-- **1.16.0**: contains the SharePoint Framework Yeoman generator from the [1.16.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.16) release
-- **1.15.2**: contains the SharePoint Framework Yeoman generator from the [1.15.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.15.2) release
-- **1.15.0**: contains the SharePoint Framework Yeoman generator from the [1.15.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.15) release
-- **1.14.0**: contains the SharePoint Framework Yeoman generator from the [1.14.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.14) release
-- **1.13.1**: contains the SharePoint Framework Yeoman generator from the [1.13.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13.1) release
-- **1.13.0**: contains the SharePoint Framework Yeoman generator from the [1.13.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13) release
-- **1.12.1**: contains the SharePoint Framework Yeoman generator from the [1.12.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.1) release
-- **1.12.0**: contains the SharePoint Framework Yeoman generator from the 1.12.0 release
-- **1.11.0**: contains the SharePoint Framework Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0) release
-- **1.10.0**: contains the SharePoint Framework Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
-- **1.9.1**: contains the SharePoint Framework Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
-- **1.8.2**: contains the SharePoint Framework Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
-- **1.8.1**: contains the SharePoint Framework Yeoman generator from the [1.8.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.1-release-notes) release
-- **1.8.0**: contains the SharePoint Framework Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
-- **1.7.1**: contains the SharePoint Framework Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
-- **1.7.0**: contains the SharePoint Framework Yeoman generator from the [1.7.0](https://github.com/SharePoint/sp-dev-docs/wiki/SharePoint-Framework-v1.7-release-notes) release
-- **1.6.0**: contains the SharePoint Framework Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
-- **1.5.1**: contains the SharePoint Framework Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
-- **1.5.0**: contains the SharePoint Framework Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SharePoint-Framework-Package-v1.5) release
-- **1.4.1**: contains the SharePoint Framework Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
-- **1.4.0**: contains the SharePoint Framework Yeoman generator from the [1.4.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4) release
-- **1.3.4**: contains the SharePoint Framework Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
-- **1.3.2**: contains the SharePoint Framework Yeoman generator from the 1.3.2 release
-- **1.3.1**: contains the SharePoint Framework Yeoman generator from the 1.3.1 release
-- **1.3.0**: contains the SharePoint Framework Yeoman generator from the 1.3.0 release
-- **1.2.0**: contains the SharePoint Framework Yeoman generator from the [1.2.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-RC-Drop-1.2) release
-- **1.1.3**: contains the SharePoint Framework Yeoman generator from the 1.1.3 release
-- **1.1.1**: contains the SharePoint Framework Yeoman generator from the [1.1.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
-- **1.1.0**: contains the SharePoint Framework Yeoman generator from the [1.1.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
-- **1.0.2**: contains the SharePoint Framework Yeoman generator from the 1.0.2 release
-- **ga**: contains the SharePoint Framework Yeoman generator from the [GA](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-GA) release
-- **rc0**: contains the SharePoint Framework Yeoman generator from the [RC0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-RC0) release
-- **drop-6**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 6](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-6)
-- **drop-5**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 5](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-5)
-- **drop-4**: contains the SharePoint Framework Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
+- **latest**: contains the SPFx Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
+- **online**: contains the SPFx Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
+- **onprem**: contains the SPFx Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
+- **1.24.2**: contains the SPFx Yeoman generator from the [1.24.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.2) release
+- **1.24.1**: contains the SPFx Yeoman generator from the [1.24.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.1) release
+- **1.24.0**: contains the SPFx Yeoman generator from the [1.24.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.24.0) release
+- **1.23.2**: contains the SPFx Yeoman generator from the [1.23.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23.2) release
+- **1.23.0**: contains the SPFx Yeoman generator from the [1.23.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.23) release
+- **1.22.2**: contains the SPFx Yeoman generator from the [1.22.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.2) release
+- **1.22.1**: contains the SPFx Yeoman generator from the [1.22.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22.1) release
+- **1.22.0**: contains the SPFx Yeoman generator from the [1.22.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.22) release
+- **1.21.1**: contains the SPFx Yeoman generator from the [1.21.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21.1) release
+- **1.21.0**: contains the SPFx Yeoman generator from the [1.21.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.21) release
+- **1.20.0**: contains the SPFx Yeoman generator from the [1.20.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.20) release
+- **1.19.0**: contains the SPFx Yeoman generator from the [1.19.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.19) release
+- **1.18.2**: contains the SPFx Yeoman generator from the [1.18.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.2) release
+- **1.18.1**: contains the SPFx Yeoman generator from the [1.18.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18.1) release
+- **1.18.0**: contains the SPFx Yeoman generator from the [1.18.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.18) release
+- **1.17.4**: contains the SPFx Yeoman generator from the [1.17.4](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.4) release
+- **1.17.3**: contains the SPFx Yeoman generator from the [1.17.3](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.3) release
+- **1.17.2**: contains the SPFx Yeoman generator from the [1.17.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.2) release
+- **1.17.1**: contains the SPFx Yeoman generator from the [1.17.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17.1) release
+- **1.17.0**: contains the SPFx Yeoman generator from the [1.17.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.17) release
+- **1.16.1**: contains the SPFx Yeoman generator from the [1.16.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.16.1) release
+- **1.16.0**: contains the SPFx Yeoman generator from the [1.16.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.16) release
+- **1.15.2**: contains the SPFx Yeoman generator from the [1.15.2](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.15.2) release
+- **1.15.0**: contains the SPFx Yeoman generator from the [1.15.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.15) release
+- **1.14.0**: contains the SPFx Yeoman generator from the [1.14.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.14) release
+- **1.13.1**: contains the SPFx Yeoman generator from the [1.13.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13.1) release
+- **1.13.0**: contains the SPFx Yeoman generator from the [1.13.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.13) release
+- **1.12.1**: contains the SPFx Yeoman generator from the [1.12.1](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.12.1) release
+- **1.12.0**: contains the SPFx Yeoman generator from the 1.12.0 release
+- **1.11.0**: contains the SPFx Yeoman generator from the [1.11.0](https://docs.microsoft.com/sharepoint/dev/spfx/release-1.11.0) release
+- **1.10.0**: contains the SPFx Yeoman generator from the [1.10.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.10-release-notes) release
+- **1.9.1**: contains the SPFx Yeoman generator from the [1.9.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.9.1-release-notes) release
+- **1.8.2**: contains the SPFx Yeoman generator from the [1.8.2](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.2-release-notes) release
+- **1.8.1**: contains the SPFx Yeoman generator from the [1.8.1](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8.1-release-notes) release
+- **1.8.0**: contains the SPFx Yeoman generator from the [1.8.0](https://github.com/sharepoint/sp-dev-docs/wiki/SharePoint-Framework-v1.8-release-notes) release
+- **1.7.1**: contains the SPFx Yeoman generator from the [1.7.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.7.1) release
+- **1.7.0**: contains the SPFx Yeoman generator from the [1.7.0](https://github.com/SharePoint/sp-dev-docs/wiki/SharePoint-Framework-v1.7-release-notes) release
+- **1.6.0**: contains the SPFx Yeoman generator from the [1.6.0](https://github.com/sharepoint/sp-dev-docs/wiki/v-1.6-release-notes) release
+- **1.5.1**: contains the SPFx Yeoman generator from the [1.5.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.5.1) release
+- **1.5.0**: contains the SPFx Yeoman generator from the [1.5.0](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SharePoint-Framework-Package-v1.5) release
+- **1.4.1**: contains the SPFx Yeoman generator from the [1.4.1](https://github.com/sharepoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4.1) release
+- **1.4.0**: contains the SPFx Yeoman generator from the [1.4.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-for-SPFx-Package-Version-1.4) release
+- **1.3.4**: contains the SPFx Yeoman generator from the [1.3.4](https://dev.office.com/blogs/improved-support-for-office-ui-fabric-core) release
+- **1.3.2**: contains the SPFx Yeoman generator from the 1.3.2 release
+- **1.3.1**: contains the SPFx Yeoman generator from the 1.3.1 release
+- **1.3.0**: contains the SPFx Yeoman generator from the 1.3.0 release
+- **1.2.0**: contains the SPFx Yeoman generator from the [1.2.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-RC-Drop-1.2) release
+- **1.1.3**: contains the SPFx Yeoman generator from the 1.1.3 release
+- **1.1.1**: contains the SPFx Yeoman generator from the [1.1.1](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
+- **1.1.0**: contains the SPFx Yeoman generator from the [1.1.0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes---Extensions-Dev-Preview-Drop-1) release
+- **1.0.2**: contains the SPFx Yeoman generator from the 1.0.2 release
+- **ga**: contains the SPFx Yeoman generator from the [GA](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-GA) release
+- **rc0**: contains the SPFx Yeoman generator from the [RC0](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-RC0) release
+- **drop-6**: contains the SPFx Yeoman generator from the [developer preview drop 6](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-6)
+- **drop-5**: contains the SPFx Yeoman generator from the [developer preview drop 5](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-5)
+- **drop-4**: contains the SPFx Yeoman generator from the [developer preview drop 4](https://github.com/SharePoint/sp-dev-docs/wiki/Release-Notes-Drop-4-and-MDL2)
