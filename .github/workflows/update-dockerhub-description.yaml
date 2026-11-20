@@ -1,23 +1,32 @@
 name: Update Docker Hub Description
 
 on:
+  # Run automatically after a new image tag has been pushed to Docker Hub
+  workflow_run:
+    workflows: ["Image Build and Push"]
+    types: [completed]
+  # Or run manually against any branch or tag
   workflow_dispatch:
 
 jobs:
   update-description:
+    # Skip when the triggering image build failed or was cancelled
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment: DockerHubProd
     steps:
-      # Checkout the branch or tag selected when running the workflow
+      # Checkout the commit that was built, or the branch/tag selected when run manually
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
       # Sync README.md to the Docker Hub repository overview
       - name: Update Docker Hub description
         uses: peter-evans/dockerhub-description@v5
         with:
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ vars.DOCKER_USERNAME_DESCRIPTION }}
+          password: ${{ secrets.DOCKER_PASSWORD_DESCRIPTION }}
           repository: ${{ vars.DOCKER_ORG }}/spfx
           short-description: Docker images for SharePoint Framework
           readme-filepath: ./README.md
